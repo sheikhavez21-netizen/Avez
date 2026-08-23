@@ -81,8 +81,59 @@ export const SUBSCRIPTIONS = [
   },
 ];
 
+export const VIDEO = "/assets/relay-wash.mp4";
+export const VIDEO_WEBM = "/assets/relay-wash.webm";
+
 export const IMAGES = {
-  hero: "https://images.unsplash.com/photo-1624880056652-c7993c99190f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHwyfHxwcmVtaXVtJTIwY2xlYW4lMjBjYXIlMjB3aGl0ZSUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzg3NDgzNTA0fDA&ixlib=rb-4.1.0&q=85",
-  susegad: "https://images.unsplash.com/photo-1681679328683-c4d4ef25b90c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTB8MHwxfHNlYXJjaHwyfHxnb2ElMjBwYWxtJTIwdHJlZXMlMjBzdW5saWdodHxlbnwwfHx8fDE3ODc0ODM1MDR8MA&ixlib=rb-4.1.0&q=85",
-  detailing: "https://images.unsplash.com/photo-1694678505383-676d78ea3b96?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODl8MHwxfHNlYXJjaHwzfHxjYXIlMjBkZXRhaWxpbmclMjBjbG9zZSUyMHVwfGVufDB8fHx8MTc4NzQ4MzUwNHww&ixlib=rb-4.1.0&q=85",
+  heroPoster: "/assets/wash-1.jpg",
+  susegad: "/assets/wash-2.jpg",
+  detailing: "/assets/wash-3.jpg",
 };
+
+export const TESTIMONIALS = [
+  {
+    quote: "Booked on WhatsApp at 9am, car was gleaming by lunch. I didn't leave my balcony. This is how car care should work in Goa.",
+    name: "Rohan Dessai",
+    area: "Panjim",
+    plan: "GT Wash customer",
+  },
+  {
+    quote: "My car has ceramic coating and I'm picky about who touches it. The Relay crew knew exactly what they were doing — proper products, no shortcuts.",
+    name: "Alisha Fernandes",
+    area: "Panjim",
+    plan: "Ceramic Turbo customer",
+  },
+  {
+    quote: "I'm on the Gold plan now. Same crew, same standard, every single month. My car hasn't seen a wash bay queue in six months.",
+    name: "Vikram Kamat",
+    area: "Panjim",
+    plan: "Relay Club Gold member",
+  },
+];
+
+export const FAQS = [
+  {
+    q: "Are your products safe for ceramic-coated and PPF cars?",
+    a: "Yes. We use professional-grade, pH-balanced car-care products specifically selected to be safe on ceramic coatings, PPF and regular paint. The Ceramic Turbo Wash is designed exactly for protected vehicles.",
+  },
+  {
+    q: "Do you need water or electricity from my home?",
+    a: "No. Our crew arrives fully equipped with everything needed for the wash. You don't have to arrange water, power or anything else — just park the car where it normally sits.",
+  },
+  {
+    q: "How long does a wash take?",
+    a: "Sport Wash takes 30–40 minutes, GT Wash 60–75 minutes, Ceramic Turbo 90–120 minutes, and the RS Signature Wash about 2.5–3 hours. You carry on with your day while we work.",
+  },
+  {
+    q: "How do I book or reschedule?",
+    a: "Everything happens on WhatsApp — message us, pick your package, share your location and a time slot. Done in under 2 minutes. Need to reschedule? Just message us again, no penalties.",
+  },
+  {
+    q: "When do I pay?",
+    a: "After the wash, once you've inspected the car and you're happy. No advance payment, no hidden charges. That's the Relay promise.",
+  },
+  {
+    q: "Which areas do you cover?",
+    a: "We're currently serving Panjim and expanding across Goa. Message us your location on WhatsApp and we'll confirm availability for your area.",
+  },
+];

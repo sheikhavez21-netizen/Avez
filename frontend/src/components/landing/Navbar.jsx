@@ -1,33 +1,50 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Menu, X, MessageCircle } from "lucide-react";
 import { waLink } from "../../data/content";
 
 const LINKS = [
   { label: "Packages", href: "#packages" },
-  { label: "Monthly Plans", href: "#subscriptions" },
   { label: "Philosophy", href: "#philosophy" },
   { label: "How It Works", href: "#how" },
+  { label: "Reviews", href: "#reviews" },
+  { label: "FAQ", href: "#faq" },
 ];
 
 export const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
+  const isHome = pathname === "/";
+  const resolve = (href) => (href.startsWith("#") && !isHome ? `/${href}` : href);
+  const monthlyActive = pathname === "/monthly";
   return (
     <header data-testid="navbar" className="fixed top-0 inset-x-0 z-50 bg-white/80 backdrop-blur-xl border-b border-zinc-200/60">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
         <a href="#top" data-testid="nav-logo" className="flex items-center">
           <img src="/assets/relay-logo.png" alt="Relay Premium Car Care" className="h-8 w-auto" />
         </a>
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-7">
           {LINKS.map((l) => (
             <a
               key={l.href}
-              href={l.href}
+              href={resolve(l.href)}
               data-testid={`nav-link-${l.label.toLowerCase().replace(/\s+/g, "-")}`}
               className="text-sm font-semibold text-zinc-600 hover:text-[#FF5A00] transition-colors"
             >
               {l.label}
             </a>
           ))}
+          <a
+            href="/monthly"
+            data-testid="nav-link-monthly-plans"
+            className={`text-sm font-bold rounded-full px-4 py-1.5 transition-colors ${
+              monthlyActive
+                ? "bg-[#FF5A00] text-white"
+                : "text-[#FF5A00] bg-[#FFF0E5] hover:bg-[#FF5A00] hover:text-white"
+            }`}
+          >
+            Monthly Plans
+          </a>
         </nav>
         <div className="flex items-center gap-3">
           <a
@@ -55,13 +72,21 @@ export const Navbar = () => {
           {LINKS.map((l) => (
             <a
               key={l.href}
-              href={l.href}
+              href={resolve(l.href)}
               onClick={() => setOpen(false)}
               className="text-sm font-semibold text-zinc-700"
             >
               {l.label}
             </a>
           ))}
+          <a
+            href="/monthly"
+            onClick={() => setOpen(false)}
+            data-testid="nav-link-monthly-plans-mobile"
+            className={`text-sm font-bold ${monthlyActive ? "text-[#FF5A00]" : "text-zinc-700"}`}
+          >
+            Monthly Plans
+          </a>
           <a
             href={waLink("Hi Relay! I want to book a car wash")}
             target="_blank"

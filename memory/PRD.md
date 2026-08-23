@@ -25,14 +25,16 @@ Landing page for Relay Premium Car Care — doorstep premium car wash service in
 
 ## Implemented
 - 2026-08-23: Full light-theme rebuild in React — Navbar (glass, mobile menu), Hero (headline, CTAs, trust badges, hero image), Philosophy/Susegad section, 4 wash packages with accordion inclusions (₹449–₹1,299), How It Works (3 steps), 4 subscription tiers (₹899–₹3,299) with perks, Why Relay standards, dark contrast Booking CTA section, Coverage (Panjim) + Footer with logo and contacts, mobile sticky booking bar. All CTAs link to WhatsApp with pre-filled messages. data-testid on all interactive elements.
+- 2026-08-23 (v2): Monthly plans moved off the home page to dedicated /monthly route (nav "Monthly Plans" pill links there). Relay wash video added to hero (transcoded H.264 mp4 + VP8 webm for browser compatibility, autoplay muted loop). Real photos: frames extracted from the wash video replace all stock images (hero poster, philosophy, why-relay). Logo made transparent (white background removed). New Testimonials section (3 Panjim customer quotes — PLACEHOLDER quotes, need real ones). New FAQ section (6 tap-to-expand questions on products, water/electricity, timing, booking, payment, coverage).
 
 ## Verified
 - Page loads, all sections render, package accordion expands, hero CTA href = wa.me/919665980103, backend /api/ healthy
+- v2: subscriptions absent from home, present on /monthly; FAQ accordion expands; hero video plays (verified time advancing); logo transparent on glass nav
 
 ## Backlog
-- P0: None blocking
-- P1: Real photos of Relay crew/work (replace Unsplash stock), testimonials from real customers
-- P2: Booking form with slot picker (beyond WhatsApp), Google Maps coverage area, multilingual (Konkani/English), Instagram/social links
+- P0: Replace placeholder testimonial quotes with real customer quotes
+- P1: More real photos/videos of crew at work, Google Maps coverage area
+- P2: Booking form with slot picker (beyond WhatsApp), multilingual (Konkani/English), Instagram/social links
 
 ## Next Tasks
 1. Replace stock imagery with real Relay photos when provided

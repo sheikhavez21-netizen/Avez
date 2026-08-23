@@ -6,11 +6,13 @@ import { Hero } from "@/components/landing/Hero";
 import { Philosophy } from "@/components/landing/Philosophy";
 import { Packages } from "@/components/landing/Packages";
 import { HowItWorks } from "@/components/landing/HowItWorks";
-import { Subscriptions } from "@/components/landing/Subscriptions";
 import { WhyRelay } from "@/components/landing/WhyRelay";
+import { Testimonials } from "@/components/landing/Testimonials";
+import { FAQ } from "@/components/landing/FAQ";
 import { BookingCTA } from "@/components/landing/BookingCTA";
 import { Footer } from "@/components/landing/Footer";
 import { MobileCTA } from "@/components/landing/MobileCTA";
+import MonthlyPlans from "@/pages/MonthlyPlans";
 
 const Home = () => {
   useReveal();
@@ -22,8 +24,9 @@ const Home = () => {
       <Philosophy />
       <Packages />
       <HowItWorks />
-      <Subscriptions />
       <WhyRelay />
+      <Testimonials />
+      <FAQ />
       <BookingCTA />
       <div className="flag-strip" />
       <Footer />
@@ -38,6 +41,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/monthly" element={<MonthlyPlans />} />
         </Routes>
       </BrowserRouter>
     </div>

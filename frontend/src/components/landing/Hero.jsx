@@ -1,5 +1,6 @@
+import { useEffect, useRef } from "react";
 import { CalendarCheck, ArrowRight, Clock, ShieldCheck, Users, MessageCircle } from "lucide-react";
-import { waLink, IMAGES } from "../../data/content";
+import { waLink, IMAGES, VIDEO, VIDEO_WEBM } from "../../data/content";
 
 const BADGES = [
   { icon: Clock, title: "Save Time", sub: "No driving. No waiting." },
@@ -8,7 +9,12 @@ const BADGES = [
   { icon: MessageCircle, title: "Book in 2 Minutes", sub: "On WhatsApp. That's it." },
 ];
 
-export const Hero = () => (
+export const Hero = () => {
+  const videoRef = useRef(null);
+  useEffect(() => {
+    videoRef.current?.play().catch(() => {});
+  }, []);
+  return (
   <section id="top" data-testid="hero-section" className="relative pt-28 pb-16 sm:pt-36 sm:pb-24 overflow-hidden">
     <div
       className="absolute inset-0 -z-10"
@@ -63,13 +69,20 @@ export const Hero = () => (
         </div>
       </div>
       <div className="reveal relative">
-        <div className="rounded-3xl overflow-hidden border border-zinc-200 shadow-[0_24px_60px_rgba(0,0,0,0.08)]">
-          <img
-            src={IMAGES.hero}
-            alt="Premium clean car"
-            className="w-full h-[320px] sm:h-[440px] object-cover"
-            data-testid="hero-image"
-          />
+        <div className="rounded-3xl overflow-hidden border border-zinc-200 shadow-[0_24px_60px_rgba(0,0,0,0.08)] max-w-sm mx-auto">
+          <video
+            ref={videoRef}
+            poster={IMAGES.heroPoster}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-[380px] sm:h-[520px] object-cover"
+            data-testid="hero-video"
+          >
+            <source src={VIDEO_WEBM} type="video/webm" />
+            <source src={VIDEO} type="video/mp4" />
+          </video>
         </div>
         <div className="absolute -bottom-5 -left-5 bg-white border border-zinc-200 rounded-2xl px-5 py-4 shadow-lg flex items-center gap-3">
           <div className="w-2.5 h-2.5 rounded-full bg-[#FF5A00] animate-pulse" />
@@ -80,4 +93,5 @@ export const Hero = () => (
       </div>
     </div>
   </section>
-);
+  );
+};

@@ -24,7 +24,7 @@ export const Philosophy = () => (
           <strong className="text-zinc-900">That's why we built Relay.</strong> Book in two minutes. We ride to you. You handle the Susegad — we handle the car.
         </p>
         <div className="mt-8 rounded-2xl overflow-hidden border border-zinc-200">
-          <img src={IMAGES.susegad} alt="Goan palm trees in sunlight" className="w-full h-56 object-cover" data-testid="philosophy-image" />
+          <img src={IMAGES.susegad} alt="Relay snow foam wash in action" className="w-full h-56 object-cover" data-testid="philosophy-image" />
         </div>
         <blockquote className="mt-8 border-l-4 border-[#FF5A00] pl-5">
           <p className="text-lg font-semibold text-zinc-900">"Relax. We'll take care of the car."</p>
