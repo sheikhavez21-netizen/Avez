@@ -31,6 +31,7 @@ Landing page for Relay Premium Car Care — doorstep premium car wash service in
 - 2026-08-23 (v5): Merged water + electricity into a single required "Water & electricity available?" Yes/No (utilities_available field) — No blocks the booking. Testimonials/Reviews section removed entirely (business not launched yet, no real reviews) along with its nav link.
 - 2026-08-23 (v6): How It Works ("Three steps. Zero hassle.") section and its nav link removed. Booking form now requires a map pin: Leaflet/OpenStreetMap map (no API key) with tap-to-pin, draggable marker, and "Use my current location" (browser geolocation). Pin is saved with the booking (lat/lng) and included in the WhatsApp message as a Google Maps link (https://maps.google.com/?q=lat,lng) — structured for the owner's planned WhatsApp chatbot. Admin dashboard booking rows link to the pinned location.
 - 2026-08-23 (v7): Address search added above the map (Nominatim geocoding, Goa-biased, no API key) — customer types their address/area, hits "Find on map", pin drops automatically; tap/drag fine-tuning and current-location button retained.
+- 2026-08-23 (v8): Hero copy updated — removed "Doorstep Premium Car Care · Goa" eyebrow; new tagline: "Premium Doorstep Car Wash & Detailing. You stay Susegad. We take care of the car."
 
 ## Verified
 - Page loads, all sections render, package accordion expands, backend /api/ healthy

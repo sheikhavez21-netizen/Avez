@@ -65,15 +65,6 @@ export const Hero = () => {
       <div className="absolute -top-24 -right-24 w-[480px] h-[480px] rounded-full bg-[#FF5A00]/10 blur-3xl -z-10" />
       <div className="max-w-7xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-12 items-center">
         <div>
-          <motion.p
-            variants={fadeUp}
-            custom={0}
-            initial="hidden"
-            animate="show"
-            className="text-xs font-bold uppercase tracking-[0.2em] text-[#FF5A00] mb-5"
-          >
-            Doorstep Premium Car Care · Goa
-          </motion.p>
           <h1 className="font-display uppercase italic font-black tracking-tighter text-zinc-900 leading-[0.92] text-6xl sm:text-7xl lg:text-8xl">
             <span className="block overflow-hidden pb-1">
               <motion.span className="block" variants={lineReveal} custom={0} initial="hidden" animate="show">
@@ -93,7 +84,9 @@ export const Hero = () => {
             animate="show"
             className="mt-6 text-base lg:text-lg text-zinc-600 leading-relaxed max-w-md"
           >
-            Premium car care, brought to you. You stay where you are — we handle the car.
+            <span className="font-bold text-zinc-900">Premium Doorstep Car Wash &amp; Detailing.</span>
+            <br />
+            You stay Susegad. We take care of the car.
           </motion.p>
           <motion.div variants={fadeUp} custom={0.7} initial="hidden" animate="show" className="mt-8 flex flex-wrap gap-4">
             <motion.a
