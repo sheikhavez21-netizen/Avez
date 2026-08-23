@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { CalendarCheck, ArrowRight, Clock, ShieldCheck, Users, MessageCircle } from "lucide-react";
-import { waLink, IMAGES, VIDEO, VIDEO_WEBM } from "../../data/content";
+import { IMAGES, VIDEO, VIDEO_WEBM } from "../../data/content";
 
 const BADGES = [
   { icon: Clock, title: "Save Time", sub: "No driving. No waiting." },
@@ -40,9 +40,7 @@ export const Hero = () => {
         </p>
         <div className="mt-8 flex flex-wrap gap-4">
           <a
-            href={waLink("Hi Relay! I want to book a car wash")}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#book-slot"
             data-testid="hero-book-button"
             className="inline-flex items-center gap-2 bg-[#FF5A00] hover:bg-[#E04F00] text-white font-bold rounded-full px-8 py-4 transition-colors active:scale-95"
           >

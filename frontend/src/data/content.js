@@ -137,3 +137,32 @@ export const FAQS = [
     a: "We're currently serving Panjim and expanding across Goa. Message us your location on WhatsApp and we'll confirm availability for your area.",
   },
 ];
+
+export const TIME_SLOTS = ["8–10 AM", "10 AM–12 PM", "12–2 PM", "2–4 PM", "4–6 PM"];
+
+export const SERVICE_AREAS = [
+  { name: "Panjim", aliases: ["panjim", "panaji", "panaja"] },
+  { name: "Miramar", aliases: ["miramar"] },
+  { name: "Dona Paula", aliases: ["dona paula", "donapaula"] },
+  { name: "Taleigao", aliases: ["taleigao", "taleigaon"] },
+  { name: "Caranzalem", aliases: ["caranzalem"] },
+  { name: "Bambolim", aliases: ["bambolim"] },
+  { name: "Campal", aliases: ["campal"] },
+  { name: "Altinho", aliases: ["altinho"] },
+  { name: "Fontainhas", aliases: ["fontainhas", "fontainha"] },
+  { name: "St. Inez", aliases: ["st inez", "santa inez", "santinez", "ineze"] },
+  { name: "Mala", aliases: ["mala"] },
+  { name: "Patto", aliases: ["patto", "pato"] },
+  { name: "Ribandar", aliases: ["ribandar"] },
+  { name: "Santa Cruz", aliases: ["santa cruz", "santacruz"] },
+  { name: "Merces", aliases: ["merces"] },
+];
+
+export const COMING_SOON_AREAS = [
+  { name: "Porvorim", aliases: ["porvorim"] },
+  { name: "Mapusa", aliases: ["mapusa", "mapsa"] },
+  { name: "Margao", aliases: ["margao", "madgaon"] },
+  { name: "Vasco", aliases: ["vasco", "vasco da gama"] },
+  { name: "Calangute", aliases: ["calangute"] },
+  { name: "Candolim", aliases: ["candolim"] },
+];

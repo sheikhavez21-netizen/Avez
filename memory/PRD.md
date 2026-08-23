@@ -26,10 +26,12 @@ Landing page for Relay Premium Car Care — doorstep premium car wash service in
 ## Implemented
 - 2026-08-23: Full light-theme rebuild in React — Navbar (glass, mobile menu), Hero (headline, CTAs, trust badges, hero image), Philosophy/Susegad section, 4 wash packages with accordion inclusions (₹449–₹1,299), How It Works (3 steps), 4 subscription tiers (₹899–₹3,299) with perks, Why Relay standards, dark contrast Booking CTA section, Coverage (Panjim) + Footer with logo and contacts, mobile sticky booking bar. All CTAs link to WhatsApp with pre-filled messages. data-testid on all interactive elements.
 - 2026-08-23 (v2): Monthly plans moved off the home page to dedicated /monthly route (nav "Monthly Plans" pill links there). Relay wash video added to hero (transcoded H.264 mp4 + VP8 webm for browser compatibility, autoplay muted loop). Real photos: frames extracted from the wash video replace all stock images (hero poster, philosophy, why-relay). Logo made transparent (white background removed). New Testimonials section (3 Panjim customer quotes — PLACEHOLDER quotes, need real ones). New FAQ section (6 tap-to-expand questions on products, water/electricity, timing, booking, payment, coverage).
+- 2026-08-23 (v3): Slot booking form (id=book-slot) after Packages — name (optional), package select, date picker, 5 time-slot chips, location; validates then opens WhatsApp with pre-filled booking message. Package card buttons pre-select their package in the form via "relay:select-package" event and scroll to it. Hero + mobile sticky CTAs now scroll to the form. Area Checker (id=areas) — locality input with instant yes/coming-soon/not-yet answers against 15 served + 6 coming-soon Goan localities; results link to booking form or WhatsApp waitlist/request.
 
 ## Verified
-- Page loads, all sections render, package accordion expands, hero CTA href = wa.me/919665980103, backend /api/ healthy
+- Page loads, all sections render, package accordion expands, backend /api/ healthy
 - v2: subscriptions absent from home, present on /monthly; FAQ accordion expands; hero video plays (verified time advancing); logo transparent on glass nav
+- v3: package card click pre-selects "RS Signature Wash" in form; empty submit shows validation error; filled submit opens wa.me with full pre-filled message (verified decoded text); area checker: Miramar → served, Porvorim → coming soon, unknown → not yet (all verified)
 
 ## Backlog
 - P0: Replace placeholder testimonial quotes with real customer quotes
