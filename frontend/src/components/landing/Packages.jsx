@@ -30,11 +30,7 @@ export const Packages = () => (
             <h3 className="font-display mt-2 text-2xl font-bold tracking-tight text-zinc-900">{p.name}</h3>
             <p className="mt-1 text-xs font-semibold text-zinc-500">{p.type}</p>
             <p className="mt-3 text-sm text-zinc-600 leading-relaxed">{p.result}</p>
-            <div className="mt-5 flex items-baseline gap-1.5">
-              <span className="font-display text-4xl font-black text-zinc-900">{p.price}</span>
-              <span className="text-xs text-zinc-500">onwards</span>
-            </div>
-            <div className="mt-2 flex items-center gap-1.5 text-xs font-semibold text-zinc-500">
+            <div className="mt-5 flex items-center gap-1.5 text-xs font-semibold text-zinc-500">
               <Clock size={13} className="text-[#FF5A00]" />
               {p.time}
             </div>

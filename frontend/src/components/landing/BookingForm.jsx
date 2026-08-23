@@ -44,8 +44,6 @@ export const BookingForm = () => {
   }, [blocked]);
 
   const today = new Date().toISOString().split("T")[0];
-  const selectedPkg = PACKAGES.find((p) => p.name === pkg);
-  const estPrice = carType ? selectedPkg.prices[carType] : null;
 
   const searchAddress = async () => {
     const q = addrQuery.trim();
@@ -128,7 +126,6 @@ export const BookingForm = () => {
       "",
       `Package: ${pkg}`,
       `Car type: ${carType}`,
-      `Estimated price: ₹${estPrice}`,
       `Date: ${niceDate}`,
       `Time slot: ${slot}`,
       `Location: ${location.trim()}`,
@@ -185,7 +182,7 @@ export const BookingForm = () => {
                 >
                   {PACKAGES.map((p) => (
                     <option key={p.code} value={p.name}>
-                      {p.name} · from {p.price}
+                      {p.name}
                     </option>
                   ))}
                 </select>
@@ -286,12 +283,6 @@ export const BookingForm = () => {
                 )}
               </div>
             </div>
-            {estPrice && (
-              <div data-testid="booking-est-price" className="mt-5 flex items-center justify-between bg-[#FFF0E5] rounded-2xl px-5 py-4">
-                <span className="text-sm font-bold text-zinc-900">{pkg} · {carType}</span>
-                <span className="font-display text-2xl font-black text-[#FF5A00]">₹{estPrice.toLocaleString("en-IN")}</span>
-              </div>
-            )}
             <div className="mt-5">
               <label className="block text-xs font-bold uppercase tracking-wider text-zinc-500 mb-2">Time slot</label>
               <div className="flex flex-wrap gap-2.5">

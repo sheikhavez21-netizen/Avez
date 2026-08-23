@@ -1,12 +1,15 @@
 import { useEffect } from "react";
 import "@/App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Lenis from "lenis";
 import { useReveal } from "@/hooks/useReveal";
+import { OfferBanner } from "@/components/landing/OfferBanner";
 import { Navbar } from "@/components/landing/Navbar";
 import { Hero } from "@/components/landing/Hero";
+import { QuickActions } from "@/components/landing/QuickActions";
 import { Marquee } from "@/components/landing/Marquee";
 import { Philosophy } from "@/components/landing/Philosophy";
+import { ServicesGrid } from "@/components/landing/ServicesGrid";
 import { Packages } from "@/components/landing/Packages";
 import { BookingForm } from "@/components/landing/BookingForm";
 import { WhyRelay } from "@/components/landing/WhyRelay";
@@ -15,7 +18,6 @@ import { FAQ } from "@/components/landing/FAQ";
 import { BookingCTA } from "@/components/landing/BookingCTA";
 import { Footer } from "@/components/landing/Footer";
 import { MobileCTA } from "@/components/landing/MobileCTA";
-import MonthlyPlans from "@/pages/MonthlyPlans";
 import Admin from "@/pages/Admin";
 
 const useLenis = () => {
@@ -55,11 +57,14 @@ const Home = () => {
   useReveal();
   return (
     <div className="bg-white text-zinc-900 pb-20 md:pb-0" data-testid="home-page">
+      <OfferBanner />
       <Navbar />
       <Hero />
       <div className="flag-strip" />
+      <QuickActions />
       <Philosophy />
       <Marquee />
+      <ServicesGrid />
       <Packages />
       <BookingForm />
       <WhyRelay />
@@ -80,8 +85,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/monthly" element={<MonthlyPlans />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
     </div>
