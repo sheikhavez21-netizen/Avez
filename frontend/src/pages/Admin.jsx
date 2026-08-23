@@ -136,7 +136,7 @@ export default function Admin() {
                     </div>
                     <p className="mt-1.5 text-xs text-zinc-600">{b.location}</p>
                     <p className="mt-1 text-xs text-zinc-400">
-                      {b.name || "No name"} · Water: {b.water_available ? "Yes" : "No"} · Power: {b.electricity_available ? "Yes" : "No"} · {new Date(b.created_at).toLocaleString("en-IN", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" })}
+                      {b.name || "No name"}{b.utilities_available !== undefined && b.utilities_available !== null ? ` · Water & Power: ${b.utilities_available ? "Yes" : "No"}` : ""} · {new Date(b.created_at).toLocaleString("en-IN", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" })}
                     </p>
                   </li>
                 ))}

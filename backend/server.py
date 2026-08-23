@@ -43,14 +43,14 @@ class BookingCreate(BaseModel):
     date: str = Field(pattern=DATE_RE)
     slot: str = Field(min_length=1, max_length=30)
     location: str = Field(min_length=3, max_length=300)
-    water_available: bool
-    electricity_available: bool
+    utilities_available: bool
 
 
 class Booking(BookingCreate):
     model_config = ConfigDict(extra="ignore")
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     created_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    utilities_available: Optional[bool] = None
 
 
 class BlockedSlotCreate(BaseModel):

@@ -11,7 +11,6 @@ import { Packages } from "@/components/landing/Packages";
 import { BookingForm } from "@/components/landing/BookingForm";
 import { HowItWorks } from "@/components/landing/HowItWorks";
 import { WhyRelay } from "@/components/landing/WhyRelay";
-import { Testimonials } from "@/components/landing/Testimonials";
 import { AreaChecker } from "@/components/landing/AreaChecker";
 import { FAQ } from "@/components/landing/FAQ";
 import { BookingCTA } from "@/components/landing/BookingCTA";
@@ -66,7 +65,6 @@ const Home = () => {
       <BookingForm />
       <HowItWorks />
       <WhyRelay />
-      <Testimonials />
       <AreaChecker />
       <FAQ />
       <BookingCTA />

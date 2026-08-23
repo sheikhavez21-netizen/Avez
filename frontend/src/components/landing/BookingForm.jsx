@@ -1,39 +1,11 @@
 import { useEffect, useState } from "react";
-import { CalendarCheck, MessageCircle, Droplets, Plug } from "lucide-react";
+import { CalendarCheck, MessageCircle, Droplets } from "lucide-react";
 import { PACKAGES, CAR_TYPES, TIME_SLOTS, waLink } from "../../data/content";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 const fieldCls =
   "w-full rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 placeholder:text-zinc-400 placeholder:font-normal focus:outline-none focus:border-[#FF5A00] focus:ring-2 focus:ring-[#FF5A00]/20 transition-colors";
-
-const YesNo = ({ label, icon: Icon, value, onChange, testid }) => (
-  <div>
-    <label className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-zinc-500 mb-2">
-      <Icon size={13} className="text-[#FF5A00]" />
-      {label} <span className="text-[#FF5A00]">*</span>
-    </label>
-    <div className="flex gap-2.5">
-      {[true, false].map((v) => (
-        <button
-          key={String(v)}
-          type="button"
-          onClick={() => onChange(v)}
-          data-testid={`${testid}-${v ? "yes" : "no"}`}
-          className={`flex-1 rounded-full px-4 py-2.5 text-sm font-bold transition-colors active:scale-95 ${
-            value === v
-              ? v
-                ? "bg-emerald-500 text-white"
-                : "bg-red-500 text-white"
-              : "bg-zinc-100 text-zinc-700 hover:bg-zinc-200"
-          }`}
-        >
-          {v ? "Yes" : "No"}
-        </button>
-      ))}
-    </div>
-  </div>
-);
 
 export const BookingForm = () => {
   const [pkg, setPkg] = useState(PACKAGES[1].name);
@@ -42,8 +14,7 @@ export const BookingForm = () => {
   const [slot, setSlot] = useState("");
   const [location, setLocation] = useState("");
   const [name, setName] = useState("");
-  const [water, setWater] = useState(null);
-  const [electricity, setElectricity] = useState(null);
+  const [utilities, setUtilities] = useState(null);
   const [error, setError] = useState("");
   const [blocked, setBlocked] = useState([]);
 
@@ -81,11 +52,11 @@ export const BookingForm = () => {
       setError("That slot just got booked — pick another time.");
       return;
     }
-    if (water === null || electricity === null) {
+    if (utilities === null) {
       setError("Please confirm whether water and electricity are available at the location.");
       return;
     }
-    if (!water || !electricity) {
+    if (!utilities) {
       setError("We need both water and electricity at the location to proceed — we can't complete this booking without them.");
       return;
     }
@@ -106,8 +77,7 @@ export const BookingForm = () => {
           date,
           slot,
           location: location.trim(),
-          water_available: water,
-          electricity_available: electricity,
+          utilities_available: utilities,
         }),
       });
     } catch {}
@@ -120,8 +90,7 @@ export const BookingForm = () => {
       `Date: ${niceDate}`,
       `Time slot: ${slot}`,
       `Location: ${location.trim()}`,
-      `Water available: Yes`,
-      `Electricity available: Yes`,
+      `Water & electricity: Yes`,
     ];
     if (name.trim()) lines.push(`Name: ${name.trim()}`);
     window.open(waLink(lines.join("\n")), "_blank", "noopener,noreferrer");
@@ -254,15 +223,36 @@ export const BookingForm = () => {
                 </p>
               )}
             </div>
-            <div className="mt-6 grid sm:grid-cols-2 gap-5">
-              <YesNo label="Water tap available?" icon={Droplets} value={water} onChange={setWater} testid="booking-water" />
-              <YesNo label="Power outlet available?" icon={Plug} value={electricity} onChange={setElectricity} testid="booking-electricity" />
+            <div className="mt-6">
+              <label className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-zinc-500 mb-2">
+                <Droplets size={13} className="text-[#FF5A00]" />
+                Water &amp; electricity available? <span className="text-[#FF5A00]">*</span>
+              </label>
+              <div className="flex gap-2.5 max-w-xs">
+                {[true, false].map((v) => (
+                  <button
+                    key={String(v)}
+                    type="button"
+                    onClick={() => setUtilities(v)}
+                    data-testid={`booking-utilities-${v ? "yes" : "no"}`}
+                    className={`flex-1 rounded-full px-4 py-2.5 text-sm font-bold transition-colors active:scale-95 ${
+                      utilities === v
+                        ? v
+                          ? "bg-emerald-500 text-white"
+                          : "bg-red-500 text-white"
+                        : "bg-zinc-100 text-zinc-700 hover:bg-zinc-200"
+                    }`}
+                  >
+                    {v ? "Yes" : "No"}
+                  </button>
+                ))}
+              </div>
+              {utilities === false && (
+                <p data-testid="booking-utility-warning" className="mt-3 text-xs font-semibold text-red-600 bg-red-50 rounded-xl px-4 py-3">
+                  Our equipment needs a water tap and a power outlet at the location. Without both, we can't proceed with a doorstep booking.
+                </p>
+              )}
             </div>
-            {(water === false || electricity === false) && (
-              <p data-testid="booking-utility-warning" className="mt-4 text-xs font-semibold text-red-600 bg-red-50 rounded-xl px-4 py-3">
-                Our equipment needs a water tap and a power outlet at the location. Without both, we can't proceed with a doorstep booking.
-              </p>
-            )}
             {error && (
               <p data-testid="booking-error" className="mt-4 text-sm font-semibold text-red-600">
                 {error}
