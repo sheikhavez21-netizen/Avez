@@ -44,6 +44,8 @@ class BookingCreate(BaseModel):
     slot: str = Field(min_length=1, max_length=30)
     location: str = Field(min_length=3, max_length=300)
     utilities_available: bool
+    lat: Optional[float] = None
+    lng: Optional[float] = None
 
 
 class Booking(BookingCreate):

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { CalendarCheck, MessageCircle, Droplets } from "lucide-react";
+import { CalendarCheck, MessageCircle, Droplets, Crosshair, MapPin } from "lucide-react";
 import { PACKAGES, CAR_TYPES, TIME_SLOTS, waLink } from "../../data/content";
+import { PinMap } from "./PinMap";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -13,6 +14,7 @@ export const BookingForm = () => {
   const [date, setDate] = useState("");
   const [slot, setSlot] = useState("");
   const [location, setLocation] = useState("");
+  const [pin, setPin] = useState(null);
   const [name, setName] = useState("");
   const [utilities, setUtilities] = useState(null);
   const [error, setError] = useState("");
@@ -43,6 +45,17 @@ export const BookingForm = () => {
   const selectedPkg = PACKAGES.find((p) => p.name === pkg);
   const estPrice = carType ? selectedPkg.prices[carType] : null;
 
+  const locateMe = () => {
+    if (!navigator.geolocation) {
+      setError("Location access isn't available on this device — tap the map to pin manually.");
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(
+      (pos) => setPin({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
+      () => setError("Couldn't get your current location — tap the map to pin it manually.")
+    );
+  };
+
   const submit = async () => {
     if (!carType || !date || !slot || !location.trim()) {
       setError("Please pick your car type, a date, a time slot and tell us where the car is.");
@@ -50,6 +63,10 @@ export const BookingForm = () => {
     }
     if (isBlocked(slot)) {
       setError("That slot just got booked — pick another time.");
+      return;
+    }
+    if (!pin) {
+      setError("Please pin your exact location on the map so our crew can find you.");
       return;
     }
     if (utilities === null) {
@@ -66,6 +83,7 @@ export const BookingForm = () => {
       day: "numeric",
       month: "short",
     });
+    const mapsLink = `https://maps.google.com/?q=${pin.lat.toFixed(6)},${pin.lng.toFixed(6)}`;
     try {
       await fetch(`${API}/bookings`, {
         method: "POST",
@@ -78,6 +96,8 @@ export const BookingForm = () => {
           slot,
           location: location.trim(),
           utilities_available: utilities,
+          lat: pin.lat,
+          lng: pin.lng,
         }),
       });
     } catch {}
@@ -90,6 +110,7 @@ export const BookingForm = () => {
       `Date: ${niceDate}`,
       `Time slot: ${slot}`,
       `Location: ${location.trim()}`,
+      `Maps pin: ${mapsLink}`,
       `Water & electricity: Yes`,
     ];
     if (name.trim()) lines.push(`Name: ${name.trim()}`);
@@ -107,7 +128,7 @@ export const BookingForm = () => {
             We ride over.
           </h2>
           <p className="mt-5 text-base lg:text-lg text-zinc-600 leading-relaxed">
-            Choose your package, car type, date and time. Pricing depends on your car — you'll see the exact estimate before confirming.
+            Choose your package, car type, date and time. Pin your exact spot on the map so the crew rides straight to your car.
           </p>
           <ul className="mt-8 flex flex-col gap-3">
             {["No advance — pay after you inspect the car", "Free rescheduling over WhatsApp", "Water & power needed at your location", "Same crew, same standard, every time"].map((t) => (
@@ -175,15 +196,44 @@ export const BookingForm = () => {
                 />
               </div>
               <div className="sm:col-span-2">
-                <label className="block text-xs font-bold uppercase tracking-wider text-zinc-500 mb-2">Location</label>
+                <label className="block text-xs font-bold uppercase tracking-wider text-zinc-500 mb-2">Building / street / landmark</label>
                 <input
                   type="text"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
-                  placeholder="Building / street / landmark"
+                  placeholder="e.g. Citi Residency, near Miramar Circle"
                   data-testid="booking-location-input"
                   className={fieldCls}
                 />
+              </div>
+              <div className="sm:col-span-2">
+                <div className="flex items-center justify-between mb-2">
+                  <label className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-zinc-500">
+                    <MapPin size={13} className="text-[#FF5A00]" />
+                    Pin your location <span className="text-[#FF5A00]">*</span>
+                  </label>
+                  <button
+                    type="button"
+                    onClick={locateMe}
+                    data-testid="booking-use-location-button"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#FF5A00] hover:text-[#E04F00] transition-colors"
+                  >
+                    <Crosshair size={13} />
+                    Use my current location
+                  </button>
+                </div>
+                <div data-testid="booking-map">
+                  <PinMap pin={pin} onPin={setPin} />
+                </div>
+                {pin ? (
+                  <p data-testid="booking-pin-status" className="mt-2 text-xs font-semibold text-emerald-600">
+                    Pinned at {pin.lat.toFixed(5)}, {pin.lng.toFixed(5)} — drag the pin or tap the map to adjust.
+                  </p>
+                ) : (
+                  <p data-testid="booking-pin-hint" className="mt-2 text-xs text-zinc-500">
+                    Tap the map to drop a pin where the car will be.
+                  </p>
+                )}
               </div>
             </div>
             {estPrice && (

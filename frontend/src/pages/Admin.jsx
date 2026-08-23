@@ -135,6 +135,16 @@ export default function Admin() {
                       <span className="text-xs font-bold text-[#FF5A00] bg-[#FFF0E5] rounded-full px-3 py-1">{b.date} · {b.slot}</span>
                     </div>
                     <p className="mt-1.5 text-xs text-zinc-600">{b.location}</p>
+                    {b.lat && b.lng && (
+                      <a
+                        href={`https://maps.google.com/?q=${b.lat},${b.lng}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-1 inline-block text-xs font-bold text-[#FF5A00] hover:text-[#E04F00] transition-colors"
+                      >
+                        View pinned location →
+                      </a>
+                    )}
                     <p className="mt-1 text-xs text-zinc-400">
                       {b.name || "No name"}{b.utilities_available !== undefined && b.utilities_available !== null ? ` · Water & Power: ${b.utilities_available ? "Yes" : "No"}` : ""} · {new Date(b.created_at).toLocaleString("en-IN", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" })}
                     </p>

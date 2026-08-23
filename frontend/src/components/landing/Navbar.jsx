@@ -6,7 +6,6 @@ import { waLink } from "../../data/content";
 const LINKS = [
   { label: "Packages", href: "#packages" },
   { label: "Philosophy", href: "#philosophy" },
-  { label: "How It Works", href: "#how" },
   { label: "FAQ", href: "#faq" },
 ];
 
