@@ -172,10 +172,3 @@ export const COMING_SOON_AREAS = [
   { name: "Calangute", aliases: ["calangute"] },
   { name: "Candolim", aliases: ["candolim"] },
 ];
-
-export const SERVICES = [
-  { name: "Exterior Wash", desc: "Snow foam quick reset", img: "/assets/cat-sport.jpg", pkg: "Sport Wash" },
-  { name: "Interior + Exterior", desc: "The complete refresh", img: "/assets/cat-gt.jpg", pkg: "GT Wash" },
-  { name: "Signature Detailing", desc: "Deep clean & restore", img: "/assets/cat-rs.jpg", pkg: "RS Signature Wash" },
-  { name: "Ceramic & PPF Care", desc: "Hydrophobic boost", img: "/assets/cat-ceramic.jpg", pkg: "Ceramic Turbo Wash" },
-];

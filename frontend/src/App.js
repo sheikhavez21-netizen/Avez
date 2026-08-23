@@ -3,13 +3,10 @@ import "@/App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Lenis from "lenis";
 import { useReveal } from "@/hooks/useReveal";
-import { OfferBanner } from "@/components/landing/OfferBanner";
 import { Navbar } from "@/components/landing/Navbar";
 import { Hero } from "@/components/landing/Hero";
-import { QuickActions } from "@/components/landing/QuickActions";
 import { Marquee } from "@/components/landing/Marquee";
 import { Philosophy } from "@/components/landing/Philosophy";
-import { ServicesGrid } from "@/components/landing/ServicesGrid";
 import { Packages } from "@/components/landing/Packages";
 import { BookingForm } from "@/components/landing/BookingForm";
 import { WhyRelay } from "@/components/landing/WhyRelay";
@@ -57,14 +54,11 @@ const Home = () => {
   useReveal();
   return (
     <div className="bg-white text-zinc-900 pb-20 md:pb-0" data-testid="home-page">
-      <OfferBanner />
       <Navbar />
       <Hero />
       <div className="flag-strip" />
-      <QuickActions />
       <Philosophy />
       <Marquee />
-      <ServicesGrid />
       <Packages />
       <BookingForm />
       <WhyRelay />

@@ -4,7 +4,6 @@ import { Menu, X, MessageCircle } from "lucide-react";
 import { waLink } from "../../data/content";
 
 const LINKS = [
-  { label: "Home", href: "#top" },
   { label: "Packages", href: "#packages" },
   { label: "Philosophy", href: "#philosophy" },
   { label: "FAQ", href: "#faq" },
@@ -16,7 +15,7 @@ export const Navbar = () => {
   const isHome = pathname === "/";
   const resolve = (href) => (href.startsWith("#") && !isHome ? `/${href}` : href);
   return (
-    <header data-testid="navbar" className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-zinc-200/60">
+    <header data-testid="navbar" className="fixed top-0 inset-x-0 z-50 bg-white/80 backdrop-blur-xl border-b border-zinc-200/60">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
         <a href="#top" data-testid="nav-logo" className="flex items-center">
           <img src="/assets/relay-logo.png" alt="Relay Premium Car Care" className="h-8 w-auto" />
