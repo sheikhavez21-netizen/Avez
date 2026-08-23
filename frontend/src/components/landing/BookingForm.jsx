@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CalendarCheck, MessageCircle, Droplets, Crosshair, MapPin } from "lucide-react";
+import { CalendarCheck, MessageCircle, Droplets, Crosshair, MapPin, Search } from "lucide-react";
 import { PACKAGES, CAR_TYPES, TIME_SLOTS, waLink } from "../../data/content";
 import { PinMap } from "./PinMap";
 
@@ -15,6 +15,8 @@ export const BookingForm = () => {
   const [slot, setSlot] = useState("");
   const [location, setLocation] = useState("");
   const [pin, setPin] = useState(null);
+  const [addrQuery, setAddrQuery] = useState("");
+  const [addrStatus, setAddrStatus] = useState("");
   const [name, setName] = useState("");
   const [utilities, setUtilities] = useState(null);
   const [error, setError] = useState("");
@@ -45,14 +47,34 @@ export const BookingForm = () => {
   const selectedPkg = PACKAGES.find((p) => p.name === pkg);
   const estPrice = carType ? selectedPkg.prices[carType] : null;
 
+  const searchAddress = async () => {
+    const q = addrQuery.trim();
+    if (q.length < 3) return;
+    setAddrStatus("searching");
+    try {
+      const r = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=in&q=${encodeURIComponent(`${q}, Goa`)}`
+      );
+      const data = await r.json();
+      if (data.length) {
+        setPin({ lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon) });
+        setAddrStatus("");
+      } else {
+        setAddrStatus("notfound");
+      }
+    } catch {
+      setAddrStatus("notfound");
+    }
+  };
+
   const locateMe = () => {
     if (!navigator.geolocation) {
-      setError("Location access isn't available on this device — tap the map to pin manually.");
+      setError("Location access isn't available on this device — type your address or tap the map to pin manually.");
       return;
     }
     navigator.geolocation.getCurrentPosition(
       (pos) => setPin({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
-      () => setError("Couldn't get your current location — tap the map to pin it manually.")
+      () => setError("Couldn't get your current location — type your address or tap the map to pin it manually.")
     );
   };
 
@@ -66,7 +88,7 @@ export const BookingForm = () => {
       return;
     }
     if (!pin) {
-      setError("Please pin your exact location on the map so our crew can find you.");
+      setError("Please search your address or pin your location on the map so our crew can find you.");
       return;
     }
     if (utilities === null) {
@@ -128,7 +150,7 @@ export const BookingForm = () => {
             We ride over.
           </h2>
           <p className="mt-5 text-base lg:text-lg text-zinc-600 leading-relaxed">
-            Choose your package, car type, date and time. Pin your exact spot on the map so the crew rides straight to your car.
+            Choose your package, car type, date and time. Type your address, we'll drop the pin — drag it to your exact parking spot.
           </p>
           <ul className="mt-8 flex flex-col gap-3">
             {["No advance — pay after you inspect the car", "Free rescheduling over WhatsApp", "Water & power needed at your location", "Same crew, same standard, every time"].map((t) => (
@@ -222,6 +244,34 @@ export const BookingForm = () => {
                     Use my current location
                   </button>
                 </div>
+                <div className="flex gap-2.5 mb-3">
+                  <div className="relative flex-1">
+                    <Search size={15} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400" />
+                    <input
+                      type="text"
+                      value={addrQuery}
+                      onChange={(e) => setAddrQuery(e.target.value)}
+                      onKeyDown={(e) => e.key === "Enter" && searchAddress()}
+                      placeholder="Type your address or area, e.g. Miramar"
+                      data-testid="booking-address-input"
+                      className={`${fieldCls} pl-10 rounded-full`}
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    onClick={searchAddress}
+                    disabled={addrStatus === "searching"}
+                    data-testid="booking-address-search-button"
+                    className="shrink-0 inline-flex items-center gap-2 bg-zinc-900 hover:bg-[#FF5A00] text-white text-sm font-bold rounded-full px-5 py-3 transition-colors active:scale-95 disabled:opacity-50"
+                  >
+                    {addrStatus === "searching" ? "Searching…" : "Find on map"}
+                  </button>
+                </div>
+                {addrStatus === "notfound" && (
+                  <p data-testid="booking-address-notfound" className="mb-3 text-xs font-semibold text-red-600">
+                    Couldn't find that address — try a nearby landmark or tap the map directly.
+                  </p>
+                )}
                 <div data-testid="booking-map">
                   <PinMap pin={pin} onPin={setPin} />
                 </div>
@@ -231,7 +281,7 @@ export const BookingForm = () => {
                   </p>
                 ) : (
                   <p data-testid="booking-pin-hint" className="mt-2 text-xs text-zinc-500">
-                    Tap the map to drop a pin where the car will be.
+                    Search your address above, or tap the map to drop a pin where the car will be.
                   </p>
                 )}
               </div>
