@@ -10,9 +10,10 @@ export const Packages = () => (
         Choose your wash.
       </h2>
       <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {PACKAGES.map((p) => (
+        {PACKAGES.map((p, i) => (
           <div
             key={p.code}
+            style={{ transitionDelay: `${i * 90}ms` }}
             data-testid={`package-card-${p.code.toLowerCase()}`}
             className={`reveal relative flex flex-col bg-white rounded-2xl p-7 transition-all duration-300 hover:-translate-y-1 ${
               p.popular

@@ -85,3 +85,17 @@ body {
         #09090b 28px
     );
 }
+
+.marquee-track {
+    width: max-content;
+    animation: marquee 45s linear infinite;
+}
+
+@keyframes marquee {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}

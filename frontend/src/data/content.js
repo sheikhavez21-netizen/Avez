@@ -5,6 +5,8 @@ export const PHONE_TEL = "tel:+919665980103";
 export const waLink = (text) =>
   `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
 
+export const CAR_TYPES = ["Hatchback", "Sedan", "Compact SUV", "Large SUV"];
+
 export const PACKAGES = [
   {
     code: "Sport",
@@ -12,6 +14,7 @@ export const PACKAGES = [
     type: "Quick Exterior Wash Only",
     result: "The quick exterior reset.",
     price: "₹449",
+    prices: { Hatchback: 449, Sedan: 499, "Compact SUV": 549, "Large SUV": 599 },
     time: "30–40 mins",
     key: ["Snow Foam Hand Wash", "Tyre & Rim Cleaning", "Microfiber Drying"],
     more: ["Exterior Pre-wash", "Safe Hand Wash", "Tyre Dressing", "Exterior Glass Cleaning"],
@@ -24,6 +27,7 @@ export const PACKAGES = [
     price: "₹699",
     time: "60–75 mins",
     popular: true,
+    prices: { Hatchback: 699, Sedan: 749, "Compact SUV": 799, "Large SUV": 899 },
     key: ["Everything in Sport Wash", "Interior Vacuuming (Seats, Floor, Boot)", "Dashboard, Console & AC Vent Detailing"],
     more: ["Exterior Foam Wash (Coloured Foam)", "Interior Cleaning with Antibacterial Cleaner", "Interior Wipe with Microfiber", "Tyre Dressing & Exterior Polish", "Air Freshener", "Floor Mats Vacuumed & Cleaned"],
   },
@@ -34,6 +38,7 @@ export const PACKAGES = [
     result: "For the car that needs a full reset.",
     price: "₹1,299",
     time: "2.5–3 hrs",
+    prices: { Hatchback: 1299, Sedan: 1399, "Compact SUV": 1499, "Large SUV": 1699 },
     key: ["Everything in GT Wash", "Paint Decontamination", "Interior Deep Cleaning"],
     more: ["Interior Vacuuming (Deep Clean)", "Leather Conditioning", "Trim Restoration & Dressing", "Premium Fragrance Treatment"],
   },
@@ -44,6 +49,7 @@ export const PACKAGES = [
     result: "Safely refreshes and boosts hydrophobic performance of protected vehicles.",
     price: "₹999",
     time: "90–120 mins",
+    prices: { Hatchback: 999, Sedan: 1099, "Compact SUV": 1199, "Large SUV": 1299 },
     key: ["Everything in GT Wash", "Ceramic Maintenance (Spray / Sealant)", "Hydrophobic Boost"],
     more: ["Enhanced Gloss & Shine", "Interior Protection (Dashboard, Trims)", "Tyre & Plastic Protection"],
   },
@@ -118,7 +124,7 @@ export const FAQS = [
   },
   {
     q: "Do you need water or electricity from my home?",
-    a: "No. Our crew arrives fully equipped with everything needed for the wash. You don't have to arrange water, power or anything else — just park the car where it normally sits.",
+    a: "Yes — our equipment needs access to a regular water tap and a power outlet at your location. The booking form will ask you to confirm both before we can proceed.",
   },
   {
     q: "How long does a wash take?",

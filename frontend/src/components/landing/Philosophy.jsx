@@ -34,7 +34,7 @@ export const Philosophy = () => (
       <div className="reveal flex flex-col gap-8 lg:pt-16">
         {PILLARS.map((p) => (
           <div key={p.n} className="flex gap-6 group">
-            <span className="font-display text-3xl font-black text-[#FF5A00]/30 group-hover:text-[#FF5A00] transition-colors">
+            <span className="font-display italic text-5xl font-black text-zinc-200 group-hover:text-[#FF5A00] transition-colors leading-none">
               {p.n}
             </span>
             <div>

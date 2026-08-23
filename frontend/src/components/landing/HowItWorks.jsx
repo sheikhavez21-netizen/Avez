@@ -20,6 +20,7 @@ export const HowItWorks = () => (
           <div
             key={s.n}
             data-testid={`how-step-${i + 1}`}
+            style={{ transitionDelay: `${i * 110}ms` }}
             className={`reveal bg-white border border-zinc-200 rounded-2xl p-8 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 ${i === 1 ? "md:mt-8" : ""}`}
           >
             <div className="flex items-center justify-between">

@@ -1,17 +1,51 @@
 import { useEffect, useState } from "react";
-import { CalendarCheck, MessageCircle } from "lucide-react";
-import { PACKAGES, TIME_SLOTS, waLink } from "../../data/content";
+import { CalendarCheck, MessageCircle, Droplets, Plug } from "lucide-react";
+import { PACKAGES, CAR_TYPES, TIME_SLOTS, waLink } from "../../data/content";
+
+const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 const fieldCls =
   "w-full rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 placeholder:text-zinc-400 placeholder:font-normal focus:outline-none focus:border-[#FF5A00] focus:ring-2 focus:ring-[#FF5A00]/20 transition-colors";
 
+const YesNo = ({ label, icon: Icon, value, onChange, testid }) => (
+  <div>
+    <label className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-zinc-500 mb-2">
+      <Icon size={13} className="text-[#FF5A00]" />
+      {label} <span className="text-[#FF5A00]">*</span>
+    </label>
+    <div className="flex gap-2.5">
+      {[true, false].map((v) => (
+        <button
+          key={String(v)}
+          type="button"
+          onClick={() => onChange(v)}
+          data-testid={`${testid}-${v ? "yes" : "no"}`}
+          className={`flex-1 rounded-full px-4 py-2.5 text-sm font-bold transition-colors active:scale-95 ${
+            value === v
+              ? v
+                ? "bg-emerald-500 text-white"
+                : "bg-red-500 text-white"
+              : "bg-zinc-100 text-zinc-700 hover:bg-zinc-200"
+          }`}
+        >
+          {v ? "Yes" : "No"}
+        </button>
+      ))}
+    </div>
+  </div>
+);
+
 export const BookingForm = () => {
   const [pkg, setPkg] = useState(PACKAGES[1].name);
+  const [carType, setCarType] = useState("");
   const [date, setDate] = useState("");
   const [slot, setSlot] = useState("");
   const [location, setLocation] = useState("");
   const [name, setName] = useState("");
+  const [water, setWater] = useState(null);
+  const [electricity, setElectricity] = useState(null);
   const [error, setError] = useState("");
+  const [blocked, setBlocked] = useState([]);
 
   useEffect(() => {
     const handler = (e) => setPkg(e.detail);
@@ -19,11 +53,40 @@ export const BookingForm = () => {
     return () => window.removeEventListener("relay:select-package", handler);
   }, []);
 
-  const today = new Date().toISOString().split("T")[0];
+  useEffect(() => {
+    if (!date) return setBlocked([]);
+    fetch(`${API}/blocked-slots?date=${date}`)
+      .then((r) => r.json())
+      .then(setBlocked)
+      .catch(() => setBlocked([]));
+  }, [date]);
 
-  const submit = () => {
-    if (!date || !slot || !location.trim()) {
-      setError("Please pick a date, a time slot and tell us where the car is.");
+  const dayBlocked = blocked.some((b) => !b.slot);
+  const isBlocked = (s) => dayBlocked || blocked.some((b) => b.slot === s);
+
+  useEffect(() => {
+    if (slot && isBlocked(slot)) setSlot("");
+  }, [blocked]);
+
+  const today = new Date().toISOString().split("T")[0];
+  const selectedPkg = PACKAGES.find((p) => p.name === pkg);
+  const estPrice = carType ? selectedPkg.prices[carType] : null;
+
+  const submit = async () => {
+    if (!carType || !date || !slot || !location.trim()) {
+      setError("Please pick your car type, a date, a time slot and tell us where the car is.");
+      return;
+    }
+    if (isBlocked(slot)) {
+      setError("That slot just got booked — pick another time.");
+      return;
+    }
+    if (water === null || electricity === null) {
+      setError("Please confirm whether water and electricity are available at the location.");
+      return;
+    }
+    if (!water || !electricity) {
+      setError("We need both water and electricity at the location to proceed — we can't complete this booking without them.");
       return;
     }
     setError("");
@@ -32,13 +95,33 @@ export const BookingForm = () => {
       day: "numeric",
       month: "short",
     });
+    try {
+      await fetch(`${API}/bookings`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.trim() || null,
+          package_name: pkg,
+          car_type: carType,
+          date,
+          slot,
+          location: location.trim(),
+          water_available: water,
+          electricity_available: electricity,
+        }),
+      });
+    } catch {}
     const lines = [
       "Hi Relay! I'd like to book a wash.",
       "",
       `Package: ${pkg}`,
+      `Car type: ${carType}`,
+      `Estimated price: ₹${estPrice}`,
       `Date: ${niceDate}`,
       `Time slot: ${slot}`,
       `Location: ${location.trim()}`,
+      `Water available: Yes`,
+      `Electricity available: Yes`,
     ];
     if (name.trim()) lines.push(`Name: ${name.trim()}`);
     window.open(waLink(lines.join("\n")), "_blank", "noopener,noreferrer");
@@ -55,10 +138,10 @@ export const BookingForm = () => {
             We ride over.
           </h2>
           <p className="mt-5 text-base lg:text-lg text-zinc-600 leading-relaxed">
-            Choose your package, date and time. We confirm on WhatsApp — no apps, no accounts, no advance payment.
+            Choose your package, car type, date and time. Pricing depends on your car — you'll see the exact estimate before confirming.
           </p>
           <ul className="mt-8 flex flex-col gap-3">
-            {["No advance — pay after you inspect the car", "Free rescheduling over WhatsApp", "Same crew, same standard, every time"].map((t) => (
+            {["No advance — pay after you inspect the car", "Free rescheduling over WhatsApp", "Water & power needed at your location", "Same crew, same standard, every time"].map((t) => (
               <li key={t} className="flex items-center gap-3 text-sm font-semibold text-zinc-700">
                 <span className="w-2 h-2 rounded-full bg-[#FF5A00] shrink-0" />
                 {t}
@@ -90,8 +173,24 @@ export const BookingForm = () => {
                 >
                   {PACKAGES.map((p) => (
                     <option key={p.code} value={p.name}>
-                      {p.name} · {p.price} onwards
+                      {p.name} · from {p.price}
                     </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-zinc-500 mb-2">
+                  Car type <span className="text-[#FF5A00]">*</span>
+                </label>
+                <select
+                  value={carType}
+                  onChange={(e) => setCarType(e.target.value)}
+                  data-testid="booking-car-type-select"
+                  className={fieldCls}
+                >
+                  <option value="" disabled>Select your car type</option>
+                  {CAR_TYPES.map((c) => (
+                    <option key={c} value={c}>{c}</option>
                   ))}
                 </select>
               </div>
@@ -106,7 +205,7 @@ export const BookingForm = () => {
                   className={fieldCls}
                 />
               </div>
-              <div>
+              <div className="sm:col-span-2">
                 <label className="block text-xs font-bold uppercase tracking-wider text-zinc-500 mb-2">Location</label>
                 <input
                   type="text"
@@ -118,26 +217,52 @@ export const BookingForm = () => {
                 />
               </div>
             </div>
+            {estPrice && (
+              <div data-testid="booking-est-price" className="mt-5 flex items-center justify-between bg-[#FFF0E5] rounded-2xl px-5 py-4">
+                <span className="text-sm font-bold text-zinc-900">{pkg} · {carType}</span>
+                <span className="font-display text-2xl font-black text-[#FF5A00]">₹{estPrice.toLocaleString("en-IN")}</span>
+              </div>
+            )}
             <div className="mt-5">
               <label className="block text-xs font-bold uppercase tracking-wider text-zinc-500 mb-2">Time slot</label>
               <div className="flex flex-wrap gap-2.5">
-                {TIME_SLOTS.map((s, i) => (
-                  <button
-                    key={s}
-                    type="button"
-                    onClick={() => setSlot(s)}
-                    data-testid={`booking-slot-${i + 1}`}
-                    className={`rounded-full px-4 py-2.5 text-sm font-bold transition-colors active:scale-95 ${
-                      slot === s
-                        ? "bg-[#FF5A00] text-white"
-                        : "bg-zinc-100 text-zinc-700 hover:bg-[#FFF0E5] hover:text-[#FF5A00]"
-                    }`}
-                  >
-                    {s}
-                  </button>
-                ))}
+                {TIME_SLOTS.map((s, i) => {
+                  const blockedSlot = date && isBlocked(s);
+                  return (
+                    <button
+                      key={s}
+                      type="button"
+                      disabled={blockedSlot}
+                      onClick={() => setSlot(s)}
+                      data-testid={`booking-slot-${i + 1}`}
+                      className={`rounded-full px-4 py-2.5 text-sm font-bold transition-colors active:scale-95 ${
+                        blockedSlot
+                          ? "bg-zinc-100 text-zinc-300 line-through cursor-not-allowed"
+                          : slot === s
+                            ? "bg-[#FF5A00] text-white"
+                            : "bg-zinc-100 text-zinc-700 hover:bg-[#FFF0E5] hover:text-[#FF5A00]"
+                      }`}
+                    >
+                      {s}
+                    </button>
+                  );
+                })}
               </div>
+              {dayBlocked && date && (
+                <p data-testid="booking-day-blocked-note" className="mt-3 text-xs font-semibold text-[#FF5A00]">
+                  This day is fully booked — please pick another date.
+                </p>
+              )}
             </div>
+            <div className="mt-6 grid sm:grid-cols-2 gap-5">
+              <YesNo label="Water tap available?" icon={Droplets} value={water} onChange={setWater} testid="booking-water" />
+              <YesNo label="Power outlet available?" icon={Plug} value={electricity} onChange={setElectricity} testid="booking-electricity" />
+            </div>
+            {(water === false || electricity === false) && (
+              <p data-testid="booking-utility-warning" className="mt-4 text-xs font-semibold text-red-600 bg-red-50 rounded-xl px-4 py-3">
+                Our equipment needs a water tap and a power outlet at the location. Without both, we can't proceed with a doorstep booking.
+              </p>
+            )}
             {error && (
               <p data-testid="booking-error" className="mt-4 text-sm font-semibold text-red-600">
                 {error}
