@@ -1,0 +1,145 @@
+{
+  "theme": "Light",
+  "project_name": "Relay Premium Car Care",
+  "design_concept": {
+    "vibe": "Premium, Fast, Effortless",
+    "rationale": "Transitioning from a dark, aggressive theme to a pristine, light, and premium aesthetic. Merges 'Pit Crew' efficiency with Goan 'Susegad' (relaxation) lifestyle. Clean white surfaces act as a canvas for the vibrant Relay Orange.",
+    "archetype": "The Performance Pro (Light Theme Variant) - High contrast structural grayscale with electric orange triggers."
+  },
+  "typography": {
+    "rules": [
+      "No Inter, Roboto, or generic sans for headings.",
+      "Headings must use tight letter spacing (tracking-tight) to communicate speed and precision.",
+      "Ensure contrast ratio exceeds 4.5:1 for body text."
+    ],
+    "fonts": {
+      "headings": {
+        "family": "Outfit, sans-serif",
+        "weights": ["600", "800", "900"],
+        "usage": "Use Black (900) for hero headlines to give a bold, racing-inspired stance."
+      },
+      "body": {
+        "family": "Manrope, sans-serif",
+        "weights": ["400", "500", "600"],
+        "usage": "Clean, highly readable geometric sans for dense text and pricing."
+      }
+    },
+    "hierarchy": {
+      "h1": "text-5xl sm:text-6xl lg:text-7xl font-black tracking-tighter text-zinc-900",
+      "h2": "text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-zinc-900",
+      "h3": "text-2xl font-bold tracking-tight text-zinc-900",
+      "body": "text-base lg:text-lg text-zinc-600 leading-relaxed",
+      "overline": "text-xs font-bold uppercase tracking-[0.2em] text-orange-600"
+    }
+  },
+  "colors": {
+    "background": {
+      "primary": "#FFFFFF",
+      "secondary": "#F4F4F5",
+      "glass": "rgba(255, 255, 255, 0.8)"
+    },
+    "brand": {
+      "primary": "#FF5A00",
+      "primary_hover": "#E04F00",
+      "primary_light": "#FFF0E5"
+    },
+    "text": {
+      "primary": "#09090B",
+      "secondary": "#52525B",
+      "inverse": "#FFFFFF"
+    },
+    "border": {
+      "subtle": "#E4E4E7",
+      "active": "#FF5A00"
+    }
+  },
+  "visual_enhancers": {
+    "surfaces": {
+      "navbar": "Glassmorphism: bg-white/80 backdrop-blur-xl border-b border-zinc-200/50",
+      "cards": "Flat design: bg-white border border-zinc-200 shadow-sm hover:shadow-md transition-shadow",
+      "featured_card": "Highlight: bg-white border-2 border-orange-500 shadow-[0_8px_30px_rgba(255,90,0,0.12)]"
+    },
+    "motion": {
+      "hover": "Subtle lift (-translate-y-1) for pricing cards.",
+      "buttons": "Scale down slightly on click (active:scale-95).",
+      "lists": "Staggered fade-up for 'How it works' and package inclusions."
+    }
+  },
+  "layouts_and_grids": {
+    "general_spacing": "Generous. Use py-24 or py-32 for main sections. Use gap-8 or gap-12 for grids.",
+    "hero": "2-column on desktop. Left: High-impact typography and CTA. Right: Premium car image overlapping a subtle structural grid background.",
+    "trust_badges": "4-column grid (grid-cols-2 md:grid-cols-4) with gap-6. Icons centered above text.",
+    "bento_grid": "Use for 'How it works'. grid-cols-1 md:grid-cols-3. Alternating heights to break monotony.",
+    "pricing": "1-col mobile, 2-col tablet, 4-col desktop. Use Shadcn accordion for 'What's included' to keep cards from becoming infinitely long."
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-[#FF5A00] text-white hover:bg-[#E04F00] font-bold rounded-full px-8 py-4 flex items-center gap-2",
+      "secondary": "bg-white text-zinc-900 border border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50 font-bold rounded-full px-8 py-4"
+    },
+    "shadcn_overrides": {
+      "accordion": "border-none. Items have border-b border-zinc-100.",
+      "card": "Remove default soft shadows. Use crisp 1px borders."
+    }
+  },
+  "media": {
+    "images": {
+      "logo": {
+        "url": "https://customer-assets-eiarnc6j.emergentagent.net/job_7761f5ff-18c2-45c8-91f4-ea955d2d6f61/artifacts/chtsmzy1_Relay%20Premium%20Car%20Care%20Logo%289%29.png",
+        "description": "RELAY Premium Car Care Logo (Use in Nav and Footer)",
+        "placement": "header, footer"
+      },
+      "hero_car": {
+        "url": "https://images.unsplash.com/photo-1624880056652-c7993c99190f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHwyfHxwcmVtaXVtJTIwY2xlYW4lMjBjYXIlMjB3aGl0ZSUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzg3NDgzNTA0fDA&ixlib=rb-4.1.0&q=85",
+        "description": "Clean white Porsche on white background. Blends perfectly into the light theme hero section.",
+        "placement": "hero right side"
+      },
+      "susegad_vibe": {
+        "url": "https://images.unsplash.com/photo-1681679328683-c4d4ef25b90c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTB8MHwxfHNlYXJjaHwyfHxnb2ElMjBwYWxtJTIwdHJlZXMlMjBzdW5saWdodHxlbnwwfHx8fDE3ODc0ODM1MDR8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Sun shining through palm trees. Represents the relaxed Goan 'Susegad' lifestyle.",
+        "placement": "philosophy section"
+      },
+      "detailing_action": {
+        "url": "https://images.unsplash.com/photo-1694678505383-676d78ea3b96?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODl8MHwxfHNlYXJjaHwzfHxjYXIlMjBkZXRhaWxpbmclMjBjbG9zZSUyMHVwfGVufDB8fHx8MTc4NzQ4MzUwNHww&ixlib=rb-4.1.0&q=85",
+        "description": "Car being washed, highlighting the 'Pit Crew' manual labor.",
+        "placement": "how it works or manifesto"
+      }
+    },
+    "icons": {
+      "library": "lucide-react",
+      "style": "Stroke width 2, color: #FF5A00"
+    }
+  },
+  "content_structure": {
+    "nav": "Sticky header. Left: Logo. Center: Wash Packages, Monthly, Philosophy. Right: 'Book Now' WhatsApp button.",
+    "hero": "Headline: 'Your Driveway. Our Pit Crew.' Subtext: 'Experience Goa’s most meticulous doorstep car care. You relax, we detail.' CTA: 'Book via WhatsApp'.",
+    "trust_badges": "4 Items: Save Time, Safe Products, Trusted Crew, Book in 2 min. Use orange icons.",
+    "philosophy": "Title: 'The Susegad Promise'. Text: 'You enjoy the Goan pace of life. We bring the high-speed precision of a pit crew to your doorstep.'",
+    "wash_packages": "4 Packages (₹449-₹1,299). Use standard cards. Use Shadcn Accordion for the 'What's Included' list to keep the UI from looking cluttered.",
+    "how_it_works": "3 Steps: 1. Send a WhatsApp. 2. We Arrive. 3. Showroom Shine.",
+    "subscriptions": "4 Tiers (₹899-₹3,299). Highlight the most popular tier with orange accents. List perks (Priority booking, free ceramic top-up).",
+    "manifesto": "Title: 'Why Choose Relay'. 3 standards (No water wastage, Premium microfibers, pH balanced chemicals).",
+    "footer": "Coverage area: Panjim, Goa. Contact: wa.me/919665980103. Logo.",
+    "cta_link": "https://wa.me/919665980103"
+  },
+  "accessibility": {
+    "contrast": "All text must pass WCAG AA. Orange text on white must be large enough or darkened slightly if used for small body text.",
+    "testing": "All interactive elements MUST include a data-testid attribute (e.g., data-testid='hero-book-button')."
+  },
+  "instructions_to_main_agent": [
+    "Ensure the theme is strictly light mode. Do not use dark backgrounds except perhaps for a contrasting footer or specific dark manifesto section.",
+    "Implement the 'Outfit' font for headings via Google Fonts or standard imports. Use Manrope for body text.",
+    "Do not center-align paragraphs; left-align for readability.",
+    "For the Wash Packages, MUST use Shadcn Accordion for the inclusions list to prevent massive card heights.",
+    "Use Phosphor icons or Lucide icons, keeping them tinted to the brand orange.",
+    "Apply `data-testid` to all CTAs, navigation links, and package selection buttons.",
+    "Do not use generic `transition: all`. Use specific transitions like `transition-colors` or `transition-transform`."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "Do not use dark colors as gradients.",
+    "Do not center align the app container (.App { text-align: center; } is banned).",
+    "Every interaction needs micro-animations (hover states, focus rings).",
+    "Use 2-3x more spacing than feels comfortable. Use py-24 or py-32 for section padding.",
+    "Missing image categories = use the provided URLs. DO NOT use placeholder text."
+  ]
+}
