@@ -4,6 +4,7 @@ import { Menu, X, MessageCircle } from "lucide-react";
 import { waLink } from "../../data/content";
 
 const LINKS = [
+  { label: "Home", href: "#top" },
   { label: "Packages", href: "#packages" },
   { label: "Philosophy", href: "#philosophy" },
   { label: "FAQ", href: "#faq" },
