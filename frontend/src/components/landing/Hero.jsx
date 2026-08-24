@@ -65,7 +65,7 @@ export const Hero = () => {
       <div className="absolute -top-24 -right-24 w-[480px] h-[480px] rounded-full bg-[#FF5A00]/10 blur-3xl -z-10" />
       <div className="max-w-7xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-12 items-center">
         <div>
-          <h1 className="font-display uppercase italic font-black tracking-tighter text-zinc-900 leading-[0.92] text-6xl sm:text-7xl lg:text-8xl">
+          <h1 className="font-display uppercase italic font-black tracking-tighter text-zinc-900 leading-[0.92] text-[11.5vw] sm:text-7xl lg:text-8xl">
             <span className="block overflow-hidden pb-1">
               <motion.span className="block" variants={lineReveal} custom={0} initial="hidden" animate="show">
                 Your Driveway.
@@ -150,7 +150,7 @@ export const Hero = () => {
                 <source src={VIDEO} type="video/mp4" />
               </video>
             </div>
-            <div className="absolute -bottom-5 -left-5 bg-white border border-zinc-200 rounded-2xl px-5 py-4 shadow-lg flex items-center gap-3">
+            <div className="absolute -bottom-5 left-4 sm:-left-5 bg-white border border-zinc-200 rounded-2xl px-5 py-4 shadow-lg flex items-center gap-3">
               <div className="w-2.5 h-2.5 rounded-full bg-[#FF5A00] animate-pulse" />
               <p className="text-sm font-bold text-zinc-900">
                 Serving Panjim <span className="text-zinc-500 font-medium">· More zones soon</span>
