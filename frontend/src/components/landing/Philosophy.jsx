@@ -1,20 +1,17 @@
-const Em = ({ children }) => (
-  <span className="font-display italic font-extrabold text-[#FF5A00]">{children}</span>
-);
-
-const Pillar = ({ n, title, children }) => (
-  <div className="flex gap-5 sm:gap-7 group">
-    <span className="font-display italic text-4xl sm:text-6xl font-black text-zinc-200 group-hover:text-[#FF5A00] transition-colors duration-500 leading-none shrink-0 select-none">
-      {n}
-    </span>
-    <div>
-      <h4 className="text-lg font-bold tracking-tight text-zinc-900">{title}</h4>
-      <div className="mt-2 space-y-2.5 text-sm sm:text-[15px] text-zinc-600 leading-relaxed max-w-md">
-        {children}
-      </div>
-    </div>
-  </div>
-);
+const STANDARDS = [
+  {
+    h: "Trained & Verified Captains",
+    p: "Every Relay Captain is trained on our process, verified, and equipped with the right tools — not an ad-hoc crew with a bucket and a pressure washer.",
+  },
+  {
+    h: "Premium-Grade Products",
+    p: "European car-care products, lab-tested for performance and quality — selected to be safe on regular paint, PPF and ceramic coatings alike.",
+  },
+  {
+    h: "Doorstep, On Your Time",
+    p: "No queues, no wash-bay waiting. We come to your driveway, office or apartment parking, on a slot that works for you.",
+  },
+];
 
 export const Philosophy = () => (
   <section id="philosophy" data-testid="philosophy-section" className="py-24 sm:py-32 bg-[#F4F4F5]">
@@ -38,45 +35,18 @@ export const Philosophy = () => (
               <strong className="text-zinc-900">That's why we built Relay.</strong> Book in two minutes. We ride to you. You handle the Susegad — we handle the car.
             </p>
           </div>
-          <div className="mt-9 relative rounded-3xl overflow-hidden border border-zinc-200" data-testid="philosophy-visual">
-            <img
-              src="/assets/philosophy.jpg"
-              alt="Snow foam being applied during a Relay wash"
-              className="w-full h-72 sm:h-96 object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-            <p className="absolute bottom-5 left-6 right-6 font-display italic font-black uppercase text-white text-2xl sm:text-3xl leading-[1.05] tracking-tight">
-              A proper wash
-              <br />
-              makes all the
-              <br />
-              difference.
-            </p>
-          </div>
         </div>
-        <div className="reveal flex flex-col gap-10 sm:gap-12 lg:pt-20">
-          <Pillar n="01" title="Your time is yours">
-            <p>We believe Susegad isn't a word. It's an emotion. It's the feeling of having nowhere to rush to. Of taking your time. Of enjoying your day.</p>
-            <p>No driving to a wash centre. No queues. No wasted Saturday mornings. We come to you — your driveway or your apartment parking.</p>
-            <p>Got a wedding to attend? Plans for the weekend? No time to wash the car? <Em>Just Relay it.</Em></p>
-          </Pillar>
-          <Pillar n="02" title="Products that respect your car">
-            <p>Your car deserves more than a bucket of soap and a pressure washer.</p>
-            <p>We use European car-care products, lab-tested for performance and quality, carefully selected for safe and proper vehicle care. From everyday cars to vehicles protected with PPF and ceramic coatings, we choose products and methods that respect the finish we're working on.</p>
-            <p className="font-semibold text-zinc-800">Because a clean car shouldn't come at the cost of its finish.</p>
-          </Pillar>
-          <Pillar n="03" title="A crew you can trust">
-            <p className="font-semibold text-zinc-800">Trained Captains. Dedicated care.</p>
-            <p>Every Relay Captain is trained, verified and equipped with the right tools and products. We follow a consistent process and proper wash methodology — because your car deserves more than someone simply showing up with a pressure washer.</p>
-            <p>Your car is more than just a machine. We understand.</p>
-          </Pillar>
-          <Pillar n="04" title="Book in 2 minutes">
-            <p>
-              WhatsApp us. Pick a slot. Share your location.{" "}
-              <span className="font-semibold text-zinc-800">No app. No account. No complicated forms.</span> Done.
-            </p>
-            <p><Em>Just Relay it.</Em></p>
-          </Pillar>
+        <div className="reveal lg:pt-16">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400 mb-8">The Relay Standard</p>
+          <div className="flex flex-col gap-10">
+            {STANDARDS.map((s) => (
+              <div key={s.h} className="group" data-testid={`standard-${s.h.toLowerCase().replace(/[^a-z]+/g, "-")}`}>
+                <div className="w-8 h-0.5 bg-[#FF5A00] mb-4 group-hover:w-14 transition-all duration-500" />
+                <h4 className="text-lg font-bold tracking-tight text-zinc-900">{s.h}</h4>
+                <p className="mt-2 text-sm sm:text-[15px] text-zinc-600 leading-relaxed max-w-md">{s.p}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <blockquote className="reveal mt-16 sm:mt-20 border-l-4 border-[#FF5A00] pl-6 max-w-xl" data-testid="philosophy-quote">

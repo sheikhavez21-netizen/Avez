@@ -9,7 +9,6 @@ import { Marquee } from "@/components/landing/Marquee";
 import { Philosophy } from "@/components/landing/Philosophy";
 import { Packages } from "@/components/landing/Packages";
 import { BookingForm } from "@/components/landing/BookingForm";
-import { WhyRelay } from "@/components/landing/WhyRelay";
 import { AreaChecker } from "@/components/landing/AreaChecker";
 import { FAQ } from "@/components/landing/FAQ";
 import { BookingCTA } from "@/components/landing/BookingCTA";
@@ -61,7 +60,6 @@ const Home = () => {
       <Marquee />
       <Packages />
       <BookingForm />
-      <WhyRelay />
       <AreaChecker />
       <FAQ />
       <BookingCTA />
