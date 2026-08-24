@@ -1,10 +1,9 @@
 import { CalendarCheck, Sparkles, MessageCircle } from "lucide-react";
-import { waLink } from "../../data/content";
 
 const TILES = [
-  { icon: CalendarCheck, title: "Book a Wash", sub: "Done on WhatsApp in 2 minutes", href: waLink("Hi Relay! I want to book a car wash"), external: true, testid: "quick-book" },
+  { icon: CalendarCheck, title: "Book a Wash", sub: "Pick a slot in 2 minutes", href: "/book", testid: "quick-book" },
   { icon: Sparkles, title: "View Packages", sub: "From quick resets to full details", href: "#packages", testid: "quick-packages" },
-  { icon: MessageCircle, title: "Chat on WhatsApp", sub: "Questions? We reply fast", href: waLink("Hi Relay! I have a question"), external: true, testid: "quick-whatsapp" },
+  { icon: MessageCircle, title: "Track My Pit Stop", sub: "Follow your crew live", href: "/track", testid: "quick-track" },
 ];
 
 export const QuickActions = () => (

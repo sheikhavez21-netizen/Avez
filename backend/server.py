@@ -39,14 +39,17 @@ class StatusCheckCreate(BaseModel):
 
 class BookingCreate(BaseModel):
     name: Optional[str] = Field(default=None, max_length=80)
+    phone: Optional[str] = Field(default=None, max_length=20)
     package_name: str = Field(min_length=1, max_length=80)
     car_type: Optional[str] = Field(default=None, max_length=40)
     make: Optional[str] = Field(default=None, max_length=40)
     model: Optional[str] = Field(default=None, max_length=60)
+    reg_no: Optional[str] = Field(default=None, max_length=20)
     date: str = Field(pattern=DATE_RE)
     slot: str = Field(min_length=1, max_length=30)
     location: str = Field(min_length=3, max_length=300)
-    utilities_available: bool
+    payment_method: Optional[str] = Field(default=None, max_length=20)
+    utilities_available: Optional[bool] = None
     lat: Optional[float] = None
     lng: Optional[float] = None
 
@@ -54,6 +57,7 @@ class BookingCreate(BaseModel):
 class Booking(BookingCreate):
     model_config = ConfigDict(extra="ignore")
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    status: str = "confirmed"
     created_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     utilities_available: Optional[bool] = None
 
@@ -242,6 +246,19 @@ async def update_profile(input: ProfileUpdate, phone: str = Depends(require_user
         {"$set": {"name": input.name, "make": input.make, "model": input.model, "vehicle_type": input.vehicle_type}},
     )
     return {"status": "saved"}
+
+
+@api_router.get("/bookings/{booking_id}", response_model=Booking)
+async def get_booking(booking_id: str):
+    doc = await db.bookings.find_one({"id": booking_id}, {"_id": 0})
+    if not doc:
+        raise HTTPException(status_code=404, detail="Booking not found")
+    return doc
+
+
+@api_router.get("/my/bookings", response_model=List[Booking])
+async def my_bookings(phone: str = Depends(require_user)):
+    return await db.bookings.find({"phone": phone}, {"_id": 0}).sort("date", -1).to_list(200)
 
 
 app.include_router(api_router)

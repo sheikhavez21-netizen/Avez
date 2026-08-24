@@ -86,12 +86,11 @@ export const Hero = () => {
           >
             <span className="font-bold text-zinc-900">Premium Doorstep Car Wash &amp; Detailing.</span>
             <br />
-            You stay Susegad. We take care of the car.
+            You keep the Susegad. We take care of the car.
           </motion.p>
           <motion.div variants={fadeUp} custom={0.7} initial="hidden" animate="show" className="mt-8 flex flex-wrap gap-4">
-            <motion.button
-              type="button"
-              onClick={() => window.dispatchEvent(new CustomEvent("relay:open-booking", { detail: {} }))}
+            <motion.a
+              href="/book"
               data-testid="hero-book-button"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.95 }}
@@ -99,7 +98,7 @@ export const Hero = () => {
             >
               <CalendarCheck size={18} />
               Book Your Pit Stop
-            </motion.button>
+            </motion.a>
             <motion.a
               href="#packages"
               data-testid="hero-packages-button"

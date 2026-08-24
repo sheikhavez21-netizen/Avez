@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, MessageCircle, LogIn, LogOut, User } from "lucide-react";
-import { waLink } from "../../data/content";
+import { Menu, X, CalendarCheck, LogIn, LogOut, User } from "lucide-react";
 import { getSession, clearSession } from "../../utils/auth";
 
 const LINKS = [
   { label: "Home", href: "#top" },
   { label: "Packages", href: "#packages" },
-  { label: "Philosophy", href: "#philosophy" },
-  { label: "About Us", href: "/about" },
+  { label: "How It Works", href: "#how" },
+  { label: "Our Story", href: "/about" },
+  { label: "Relay Club", href: "#club" },
+  { label: "Track My Pit Stop", href: "/track" },
 ];
 
 export const Navbar = () => {
@@ -32,24 +33,27 @@ export const Navbar = () => {
         <a href={isHome ? "#top" : "/"} data-testid="nav-logo" className="flex items-center">
           <img src="/assets/relay-logo.png" alt="Relay Premium Car Care" className="h-8 w-auto" />
         </a>
-        <nav className="hidden md:flex items-center gap-7">
+        <nav className="hidden lg:flex items-center gap-6">
           {LINKS.map((l) => (
             <a
               key={l.href}
               href={resolve(l.href)}
               data-testid={`nav-link-${l.label.toLowerCase().replace(/\s+/g, "-")}`}
-              className="text-sm font-semibold text-zinc-600 hover:text-[#FF5A00] transition-colors"
+              className="text-sm font-semibold text-zinc-600 hover:text-[#FF5A00] transition-colors whitespace-nowrap"
             >
               {l.label}
             </a>
           ))}
         </nav>
         <div className="flex items-center gap-3">
+          <span className="hidden xl:inline-flex text-[10px] font-bold tracking-[0.2em] text-zinc-400" data-testid="nav-location">
+            PANJIM · GOA
+          </span>
           {session ? (
             <span className="hidden sm:inline-flex items-center gap-2" data-testid="nav-session">
               <a href="/account" data-testid="nav-account-link" className="inline-flex items-center gap-1.5 text-xs font-bold text-zinc-700 bg-zinc-100 hover:bg-[#FFF0E5] rounded-full px-3.5 py-2 transition-colors">
                 <User size={13} className="text-[#FF5A00]" />
-                {session.phone}
+                My Relay
               </a>
               <button
                 onClick={logout}
@@ -67,23 +71,21 @@ export const Navbar = () => {
               className="hidden sm:inline-flex items-center gap-1.5 border border-zinc-300 hover:border-[#FF5A00] hover:text-[#FF5A00] text-zinc-700 text-sm font-bold rounded-full px-4 py-2 transition-colors"
             >
               <LogIn size={14} />
-              Login
+              My Relay
             </a>
           )}
           <a
-            href={waLink("Hi Relay! I want to book a car wash")}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/book"
             data-testid="nav-book-button"
             className="hidden sm:inline-flex items-center gap-2 bg-[#FF5A00] hover:bg-[#E04F00] text-white text-sm font-bold rounded-full px-5 py-2.5 transition-colors active:scale-95"
           >
-            <MessageCircle size={15} strokeWidth={2.2} />
+            <CalendarCheck size={15} strokeWidth={2.2} />
             Book Now
           </a>
           <button
             data-testid="nav-mobile-toggle"
             onClick={() => setOpen(!open)}
-            className="md:hidden p-2 text-zinc-700"
+            className="lg:hidden p-2 text-zinc-700"
             aria-label="Toggle menu"
           >
             {open ? <X size={22} /> : <Menu size={22} />}
@@ -91,7 +93,7 @@ export const Navbar = () => {
         </div>
       </div>
       {open && (
-        <div data-testid="nav-mobile-menu" className="md:hidden border-t border-zinc-100 bg-white px-5 py-5 flex flex-col gap-1">
+        <div data-testid="nav-mobile-menu" className="lg:hidden border-t border-zinc-100 bg-white px-5 py-5 flex flex-col gap-1">
           {LINKS.map((l) => (
             <a
               key={l.href}
@@ -103,13 +105,14 @@ export const Navbar = () => {
             </a>
           ))}
           {session ? (
-            <button
-              onClick={logout}
-              data-testid="nav-mobile-logout-button"
-              className="text-left text-base font-bold text-red-600 py-3 border-b border-zinc-50"
+            <a
+              href="/account"
+              onClick={() => setOpen(false)}
+              data-testid="nav-mobile-account-link"
+              className="text-base font-bold text-zinc-800 py-3 border-b border-zinc-50 active:text-[#FF5A00]"
             >
-              Log out ({session.phone})
-            </button>
+              My Relay ({session.phone})
+            </a>
           ) : (
             <a
               href="/login"
@@ -121,14 +124,12 @@ export const Navbar = () => {
             </a>
           )}
           <a
-            href={waLink("Hi Relay! I want to book a car wash")}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/book"
             data-testid="nav-mobile-book-button"
             className="mt-4 inline-flex items-center justify-center gap-2 bg-[#FF5A00] text-white text-base font-bold rounded-full px-5 py-4 active:scale-95 transition-transform"
           >
-            <MessageCircle size={15} />
-            Book Now
+            <CalendarCheck size={15} />
+            Book Your Pit Stop
           </a>
         </div>
       )}

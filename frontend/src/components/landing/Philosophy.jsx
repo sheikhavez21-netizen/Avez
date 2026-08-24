@@ -1,15 +1,23 @@
 const STANDARDS = [
   {
-    h: "Trained & Verified Captains",
-    p: "Every Relay Captain is trained on our process, verified, and equipped with the right tools — not an ad-hoc crew with a bucket and a pressure washer.",
+    h: "Trained & Verified Crew",
+    p: "Every Relay Captain is trained on our process and verified — not an ad-hoc crew with a bucket and a pressure washer.",
   },
   {
     h: "Premium-Grade Products",
-    p: "European car-care products, lab-tested for performance and quality — selected to be safe on regular paint, PPF and ceramic coatings alike.",
+    p: "European car-care products, lab-tested for performance — safe on regular paint, PPF and ceramic coatings alike.",
+  },
+  {
+    h: "Proper Equipment",
+    p: "The right tools for the job, carried to your doorstep on every single visit.",
+  },
+  {
+    h: "Consistent Process",
+    p: "The same wash methodology every time, so the result never depends on who shows up.",
   },
   {
     h: "Doorstep, On Your Time",
-    p: "No queues, no wash-bay waiting. We come to your driveway, office or apartment parking, on a slot that works for you.",
+    p: "No queues, no wash-bay waiting. Your driveway, your slot.",
   },
 ];
 

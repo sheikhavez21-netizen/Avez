@@ -4,6 +4,8 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "..
 import { PACKAGES, PRICE_TYPE_MAP } from "../../data/content";
 import { getVehicle } from "../../utils/auth";
 
+const PKG_CODES = { Sport: "SPORT-01", GT: "GT-02", RS: "RS-03", Ceramic: "CT-04" };
+
 export const Packages = () => {
   const [vehicle, setVehicleState] = useState(getVehicle());
   useEffect(() => {
@@ -13,11 +15,11 @@ export const Packages = () => {
   }, []);
 
   return (
-    <section id="packages" data-testid="packages-section" className="py-24 sm:py-32">
+    <section id="packages" data-testid="packages-section" className="py-24 sm:py-32 bg-[#F4F4F5]">
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
         <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#FF5A00] mb-4 reveal">Our Packages</p>
         <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-zinc-900 reveal">
-          Choose your wash.
+          Choose your pit stop.
         </h2>
         {vehicle && (
           <p className="mt-3 text-sm font-semibold text-zinc-500 reveal" data-testid="packages-vehicle-note">
@@ -41,7 +43,10 @@ export const Packages = () => {
                   Most Popular
                 </span>
               )}
-              <span className="text-xs font-bold uppercase tracking-[0.18em] text-[#FF5A00]">{p.code}</span>
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold uppercase tracking-[0.18em] text-[#FF5A00]">{p.code}</span>
+                <span className="text-[10px] font-bold tracking-[0.2em] text-zinc-300">{PKG_CODES[p.code]}</span>
+              </div>
               <h3 className="font-display mt-2 text-2xl font-bold tracking-tight text-zinc-900">{p.name}</h3>
               <p className="mt-1 text-xs font-semibold text-zinc-500">{p.type}</p>
               <p className="mt-3 text-sm text-zinc-600 leading-relaxed">{p.result}</p>
@@ -63,7 +68,7 @@ export const Packages = () => {
               )}
               <div className="mt-3 flex items-center gap-1.5 text-xs font-semibold text-zinc-500">
                 <Clock size={13} className="text-[#FF5A00]" />
-                {p.time}
+                EST. {p.time}
               </div>
               <div className="my-5 border-t border-zinc-100" />
               <ul className="flex flex-col gap-2.5">
@@ -96,9 +101,8 @@ export const Packages = () => {
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
-              <button
-                type="button"
-                onClick={() => window.dispatchEvent(new CustomEvent("relay:open-booking", { detail: { pkg: p.name } }))}
+              <a
+                href={`/book?pkg=${encodeURIComponent(p.name)}`}
                 data-testid={`package-book-${p.code.toLowerCase()}`}
                 className={`mt-auto pt-5 inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-bold transition-colors active:scale-95 ${
                   p.popular
@@ -107,7 +111,7 @@ export const Packages = () => {
                 }`}
               >
                 Book Your Pit Stop →
-              </button>
+              </a>
             </div>
           ))}
         </div>

@@ -7,8 +7,10 @@ import { Navbar } from "@/components/landing/Navbar";
 import { Hero } from "@/components/landing/Hero";
 import { QuickActions } from "@/components/landing/QuickActions";
 import { Philosophy } from "@/components/landing/Philosophy";
+import { HowItWorks } from "@/components/landing/HowItWorks";
 import { Packages } from "@/components/landing/Packages";
-import { BookingModal } from "@/components/landing/BookingModal";
+import { Community } from "@/components/landing/Community";
+import { RelayClub } from "@/components/landing/RelayClub";
 import { BookingCTA } from "@/components/landing/BookingCTA";
 import { Footer } from "@/components/landing/Footer";
 import { MobileCTA } from "@/components/landing/MobileCTA";
@@ -16,6 +18,8 @@ import Admin from "@/pages/Admin";
 import Login from "@/pages/Login";
 import Account from "@/pages/Account";
 import About from "@/pages/About";
+import Book from "@/pages/Book";
+import Track from "@/pages/Track";
 
 const useLenis = () => {
   useEffect(() => {
@@ -59,8 +63,10 @@ const Home = () => {
       <div className="flag-strip" />
       <QuickActions />
       <Philosophy />
+      <HowItWorks />
       <Packages />
-      <BookingModal />
+      <Community />
+      <RelayClub />
       <BookingCTA />
       <div className="flag-strip" />
       <Footer />
@@ -76,10 +82,12 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/book" element={<Book />} />
+          <Route path="/track" element={<Track />} />
+          <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
           <Route path="/account" element={<Account />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
