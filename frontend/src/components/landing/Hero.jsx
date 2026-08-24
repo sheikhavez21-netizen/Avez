@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import { CalendarCheck, ArrowRight, Clock, ShieldCheck, Users, MessageCircle } from "lucide-react";
-import { waLink, IMAGES, VIDEO, VIDEO_WEBM } from "../../data/content";
+import { IMAGES, VIDEO, VIDEO_WEBM } from "../../data/content";
 
 const EASE = [0.22, 1, 0.36, 1];
 
@@ -89,10 +89,9 @@ export const Hero = () => {
             You stay Susegad. We take care of the car.
           </motion.p>
           <motion.div variants={fadeUp} custom={0.7} initial="hidden" animate="show" className="mt-8 flex flex-wrap gap-4">
-            <motion.a
-              href={waLink("Hi Relay! I want to book a car wash")}
-              target="_blank"
-              rel="noopener noreferrer"
+            <motion.button
+              type="button"
+              onClick={() => window.dispatchEvent(new CustomEvent("relay:open-booking", { detail: {} }))}
               data-testid="hero-book-button"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.95 }}
@@ -100,7 +99,7 @@ export const Hero = () => {
             >
               <CalendarCheck size={18} />
               Book Your Pit Stop
-            </motion.a>
+            </motion.button>
             <motion.a
               href="#packages"
               data-testid="hero-packages-button"

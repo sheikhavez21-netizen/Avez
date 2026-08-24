@@ -8,6 +8,7 @@ import { Hero } from "@/components/landing/Hero";
 import { QuickActions } from "@/components/landing/QuickActions";
 import { Philosophy } from "@/components/landing/Philosophy";
 import { Packages } from "@/components/landing/Packages";
+import { BookingModal } from "@/components/landing/BookingModal";
 import { BookingCTA } from "@/components/landing/BookingCTA";
 import { Footer } from "@/components/landing/Footer";
 import { MobileCTA } from "@/components/landing/MobileCTA";
@@ -57,6 +58,7 @@ const Home = () => {
       <QuickActions />
       <Philosophy />
       <Packages />
+      <BookingModal />
       <BookingCTA />
       <div className="flag-strip" />
       <Footer />
