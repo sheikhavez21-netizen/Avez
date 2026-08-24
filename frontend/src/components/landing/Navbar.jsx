@@ -8,6 +8,7 @@ const LINKS = [
   { label: "Home", href: "#top" },
   { label: "Packages", href: "#packages" },
   { label: "Philosophy", href: "#philosophy" },
+  { label: "About Us", href: "/about" },
 ];
 
 export const Navbar = () => {

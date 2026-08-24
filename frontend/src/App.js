@@ -8,7 +8,6 @@ import { Hero } from "@/components/landing/Hero";
 import { QuickActions } from "@/components/landing/QuickActions";
 import { Philosophy } from "@/components/landing/Philosophy";
 import { Packages } from "@/components/landing/Packages";
-import { OurStory } from "@/components/landing/OurStory";
 import { BookingModal } from "@/components/landing/BookingModal";
 import { BookingCTA } from "@/components/landing/BookingCTA";
 import { Footer } from "@/components/landing/Footer";
@@ -16,6 +15,7 @@ import { MobileCTA } from "@/components/landing/MobileCTA";
 import Admin from "@/pages/Admin";
 import Login from "@/pages/Login";
 import Account from "@/pages/Account";
+import About from "@/pages/About";
 
 const useLenis = () => {
   useEffect(() => {
@@ -60,7 +60,6 @@ const Home = () => {
       <QuickActions />
       <Philosophy />
       <Packages />
-      <OurStory />
       <BookingModal />
       <BookingCTA />
       <div className="flag-strip" />
@@ -80,6 +79,7 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/login" element={<Login />} />
           <Route path="/account" element={<Account />} />
+          <Route path="/about" element={<About />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>

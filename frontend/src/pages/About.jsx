@@ -1,24 +1,20 @@
-export const OurStory = () => (
-  <section id="story" data-testid="story-section" className="py-24 sm:py-32 bg-[#F4F4F5]">
-    <div className="max-w-7xl mx-auto px-5 sm:px-8">
-      <div className="grid lg:grid-cols-2 gap-14 lg:gap-24">
-        <div className="reveal lg:sticky lg:top-28 self-start">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#FF5A00] mb-5">Our Story</p>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-zinc-900 leading-tight">
+import { Navbar } from "@/components/landing/Navbar";
+import { Footer } from "@/components/landing/Footer";
+import { useReveal } from "@/hooks/useReveal";
+
+export default function About() {
+  useReveal();
+  return (
+    <div className="bg-white text-zinc-900" data-testid="about-page">
+      <Navbar />
+      <section className="pt-32 pb-24 sm:pt-40 sm:pb-32">
+        <div className="max-w-3xl mx-auto px-5 sm:px-8">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#FF5A00] mb-5 reveal">Our Story</p>
+          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-zinc-900 leading-tight reveal">
             "We thought car care could be easier."
-          </h2>
-          <div className="mt-10 rounded-3xl overflow-hidden border border-zinc-200">
-            <img
-              src="/assets/wash-1.jpg"
-              alt="Relay pit crew at work — snow foam on a wheel"
-              className="w-full h-64 sm:h-80 object-cover"
-              data-testid="story-image"
-            />
-          </div>
-        </div>
-        <div className="reveal">
-          <div className="w-8 h-0.5 bg-[#FF5A00] mb-8" />
-          <div className="space-y-5 text-base lg:text-lg text-zinc-600 leading-relaxed max-w-xl">
+          </h1>
+          <div className="w-8 h-0.5 bg-[#FF5A00] mt-10 mb-10 reveal" />
+          <div className="space-y-5 text-base lg:text-lg text-zinc-600 leading-relaxed reveal">
             <p>
               We love our cars. But taking care of them often means giving up half a day — driving to a wash centre, waiting for your turn, and working your schedule around the car.
             </p>
@@ -44,16 +40,18 @@ export const OurStory = () => (
               And we're building Relay to be more than a car wash — a better way to care for your car.
             </p>
           </div>
+          <div className="reveal mt-24 sm:mt-32 text-center" data-testid="story-closing">
+            <div className="w-8 h-0.5 bg-[#FF5A00] mx-auto mb-10" />
+            <p className="font-display uppercase italic font-black tracking-tighter leading-[0.92] text-zinc-900 text-5xl sm:text-7xl">
+              Your Driveway.
+              <br />
+              <span className="text-[#FF5A00]">Our Pit Crew.</span>
+            </p>
+          </div>
         </div>
-      </div>
-      <div className="reveal mt-24 sm:mt-32 text-center" data-testid="story-closing">
-        <div className="w-8 h-0.5 bg-[#FF5A00] mx-auto mb-10" />
-        <p className="font-display uppercase italic font-black tracking-tighter leading-[0.92] text-zinc-900 text-5xl sm:text-7xl lg:text-8xl">
-          Your Driveway.
-          <br />
-          <span className="text-[#FF5A00]">Our Pit Crew.</span>
-        </p>
-      </div>
+      </section>
+      <div className="flag-strip" />
+      <Footer />
     </div>
-  </section>
-);
+  );
+}
