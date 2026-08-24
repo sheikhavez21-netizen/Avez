@@ -180,21 +180,40 @@ export const SERVICES = [
   { name: "Ceramic & PPF Care", desc: "Hydrophobic boost", img: "/assets/cat-ceramic.jpg", pkg: "Ceramic Turbo Wash" },
 ];
 
-export const CAR_MAKES = {
-  "Maruti Suzuki": ["Swift", "Baleno", "Dzire", "Alto", "Wagon R", "Fronx", "Brezza", "Ertiga", "Ciaz", "Jimny", "Grand Vitara", "Other"],
-  Hyundai: ["i10", "i20", "Aura", "Verna", "Venue", "Creta", "Alcazar", "Tucson", "Exter", "Other"],
-  Tata: ["Tiago", "Tigor", "Punch", "Altroz", "Nexon", "Harrier", "Safari", "Curvv", "Other"],
-  Honda: ["Amaze", "City", "Elevate", "Other"],
-  Toyota: ["Glanza", "Taisor", "Innova Crysta", "Innova Hycross", "Fortuner", "Camry", "Other"],
-  Mahindra: ["Bolero", "Scorpio-N", "Scorpio Classic", "XUV 3XO", "XUV700", "Thar", "XUV400", "Other"],
-  Kia: ["Sonet", "Seltos", "Carens", "Seltos EV", "Other"],
-  MG: ["Comet", "Astor", "Hector", "ZS EV", "Gloster", "Other"],
-  Skoda: ["Slavia", "Kushaq", "Kodiaq", "Kylaq", "Other"],
-  Volkswagen: ["Polo", "Virtus", "Taigun", "Tiguan", "Other"],
-  Renault: ["Kwid", "Triber", "Kiger", "Other"],
-  Nissan: ["Magnite", "Other"],
-  BMW: ["3 Series", "5 Series", "X1", "X3", "X5", "X7", "Other"],
-  "Mercedes-Benz": ["A-Class", "C-Class", "E-Class", "GLA", "GLC", "GLE", "Other"],
-  Audi: ["A4", "A6", "Q3", "Q5", "Q7", "Other"],
-  Other: ["Other"],
-};
+export const VEHICLE_TYPES = ["Hatchback", "Sedan", "SUV", "MUV / MPV", "Coupe", "Convertible", "Pickup", "Other"];
+
+export const POPULAR_BRANDS = ["Maruti Suzuki", "Hyundai", "Tata", "Mahindra", "Kia", "Honda", "Toyota", "Volkswagen", "BMW", "Mercedes-Benz", "Audi", "MG"];
+
+const m = (name, vehicleType) => ({ name, vehicleType });
+
+export const VEHICLES = [
+  { brand: "Maruti Suzuki", models: [m("Swift", "Hatchback"), m("Baleno", "Hatchback"), m("Dzire", "Sedan"), m("Alto", "Hatchback"), m("Wagon R", "Hatchback"), m("Fronx", "SUV"), m("Brezza", "SUV"), m("Ertiga", "MUV / MPV"), m("Ciaz", "Sedan"), m("Jimny", "SUV"), m("Grand Vitara", "SUV"), m("Invicto", "MUV / MPV"), m("Other", "Other")] },
+  { brand: "Hyundai", models: [m("i10", "Hatchback"), m("i20", "Hatchback"), m("Aura", "Sedan"), m("Verna", "Sedan"), m("Exter", "SUV"), m("Venue", "SUV"), m("Creta", "SUV"), m("Alcazar", "SUV"), m("Tucson", "SUV"), m("Ioniq 5", "SUV"), m("Other", "Other")] },
+  { brand: "Honda", models: [m("Amaze", "Sedan"), m("City", "Sedan"), m("Elevate", "SUV"), m("Other", "Other")] },
+  { brand: "Tata", models: [m("Tiago", "Hatchback"), m("Tigor", "Sedan"), m("Punch", "SUV"), m("Altroz", "Hatchback"), m("Nexon", "SUV"), m("Harrier", "SUV"), m("Safari", "SUV"), m("Curvv", "SUV"), m("Other", "Other")] },
+  { brand: "Toyota", models: [m("Glanza", "Hatchback"), m("Taisor", "SUV"), m("Innova Crysta", "MUV / MPV"), m("Innova Hycross", "MUV / MPV"), m("Fortuner", "SUV"), m("Camry", "Sedan"), m("Hilux", "Pickup"), m("Other", "Other")] },
+  { brand: "Mahindra", models: [m("Bolero", "SUV"), m("Scorpio-N", "SUV"), m("Scorpio Classic", "SUV"), m("XUV 3XO", "SUV"), m("XUV700", "SUV"), m("Thar", "SUV"), m("XUV400", "SUV"), m("Other", "Other")] },
+  { brand: "Kia", models: [m("Sonet", "SUV"), m("Seltos", "SUV"), m("Carens", "MUV / MPV"), m("Other", "Other")] },
+  { brand: "Renault", models: [m("Kwid", "Hatchback"), m("Triber", "MUV / MPV"), m("Kiger", "SUV"), m("Other", "Other")] },
+  { brand: "Nissan", models: [m("Magnite", "SUV"), m("Other", "Other")] },
+  { brand: "Volkswagen", models: [m("Polo", "Hatchback"), m("Virtus", "Sedan"), m("Taigun", "SUV"), m("Tiguan", "SUV"), m("Other", "Other")] },
+  { brand: "Skoda", models: [m("Slavia", "Sedan"), m("Kushaq", "SUV"), m("Kylaq", "SUV"), m("Kodiaq", "SUV"), m("Superb", "Sedan"), m("Octavia", "Sedan"), m("Other", "Other")] },
+  { brand: "Ford", models: [m("Figo", "Hatchback"), m("EcoSport", "SUV"), m("Endeavour", "SUV"), m("Other", "Other")] },
+  { brand: "Chevrolet", models: [m("Beat", "Hatchback"), m("Cruze", "Sedan"), m("Other", "Other")] },
+  { brand: "Fiat", models: [m("Punto", "Hatchback"), m("Linea", "Sedan"), m("Other", "Other")] },
+  { brand: "Datsun", models: [m("Go", "Hatchback"), m("redi-GO", "Hatchback"), m("Other", "Other")] },
+  { brand: "Audi", models: [m("A4", "Sedan"), m("A6", "Sedan"), m("Q3", "SUV"), m("Q5", "SUV"), m("Q7", "SUV"), m("Other", "Other")] },
+  { brand: "BMW", models: [m("2 Series", "Coupe"), m("3 Series", "Sedan"), m("4 Series", "Coupe"), m("5 Series", "Sedan"), m("7 Series", "Sedan"), m("X1", "SUV"), m("X3", "SUV"), m("X5", "SUV"), m("X7", "SUV"), m("iX", "SUV"), m("i4", "Sedan"), m("i5", "Sedan"), m("i7", "Sedan"), m("Other", "Other")] },
+  { brand: "Mercedes-Benz", models: [m("A-Class", "Hatchback"), m("C-Class", "Sedan"), m("E-Class", "Sedan"), m("S-Class", "Sedan"), m("GLA", "SUV"), m("GLC", "SUV"), m("GLE", "SUV"), m("GLS", "SUV"), m("Other", "Other")] },
+  { brand: "Volvo", models: [m("XC40", "SUV"), m("XC60", "SUV"), m("XC90", "SUV"), m("S90", "Sedan"), m("Other", "Other")] },
+  { brand: "Jaguar", models: [m("XE", "Sedan"), m("XF", "Sedan"), m("F-Pace", "SUV"), m("F-Type", "Coupe"), m("Other", "Other")] },
+  { brand: "Land Rover", models: [m("Defender", "SUV"), m("Discovery", "SUV"), m("Discovery Sport", "SUV"), m("Range Rover Evoque", "SUV"), m("Range Rover Sport", "SUV"), m("Range Rover", "SUV"), m("Other", "Other")] },
+  { brand: "Jeep", models: [m("Compass", "SUV"), m("Meridian", "SUV"), m("Wrangler", "SUV"), m("Other", "Other")] },
+  { brand: "Mitsubishi", models: [m("Pajero", "SUV"), m("Outlander", "SUV"), m("Other", "Other")] },
+  { brand: "Ferrari", models: [m("296", "Coupe"), m("Roma", "Coupe"), m("SF90", "Coupe"), m("Purosangue", "SUV"), m("Other", "Other")] },
+  { brand: "Porsche", models: [m("911", "Coupe"), m("Cayenne", "SUV"), m("Macan", "SUV"), m("Taycan", "Sedan"), m("Panamera", "Sedan"), m("Other", "Other")] },
+  { brand: "Lexus", models: [m("ES", "Sedan"), m("NX", "SUV"), m("RX", "SUV"), m("LX", "SUV"), m("Other", "Other")] },
+  { brand: "MG", models: [m("Comet", "Hatchback"), m("Astor", "SUV"), m("Hector", "SUV"), m("ZS EV", "SUV"), m("Gloster", "SUV"), m("Other", "Other")] },
+  { brand: "BYD", models: [m("Atto 3", "SUV"), m("Seal", "Sedan"), m("e6", "MUV / MPV"), m("Other", "Other")] },
+  { brand: "Other", models: [m("Other", "Other")] },
+];
