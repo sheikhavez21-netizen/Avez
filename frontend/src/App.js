@@ -7,12 +7,12 @@ import { Navbar } from "@/components/landing/Navbar";
 import { Hero } from "@/components/landing/Hero";
 import { QuickActions } from "@/components/landing/QuickActions";
 import { Philosophy } from "@/components/landing/Philosophy";
-import { ServicesGrid } from "@/components/landing/ServicesGrid";
 import { Packages } from "@/components/landing/Packages";
 import { BookingCTA } from "@/components/landing/BookingCTA";
 import { Footer } from "@/components/landing/Footer";
 import { MobileCTA } from "@/components/landing/MobileCTA";
 import Admin from "@/pages/Admin";
+import Login from "@/pages/Login";
 
 const useLenis = () => {
   useEffect(() => {
@@ -56,7 +56,6 @@ const Home = () => {
       <div className="flag-strip" />
       <QuickActions />
       <Philosophy />
-      <ServicesGrid />
       <Packages />
       <BookingCTA />
       <div className="flag-strip" />
@@ -74,6 +73,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/login" element={<Login />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>

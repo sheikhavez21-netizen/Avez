@@ -10,7 +10,8 @@ import uuid
 from pathlib import Path
 from pydantic import BaseModel, Field, ConfigDict
 from typing import List, Optional
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
+import jwt
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -138,6 +139,69 @@ async def delete_blocked_slot(slot_id: str):
     result = await db.blocked_slots.delete_one({"id": slot_id})
     if result.deleted_count == 0:
         raise HTTPException(status_code=404, detail="Blocked slot not found")
+
+
+# --- Mobile OTP auth (demo mode: OTP returned in response until an SMS provider is plugged in)
+
+class SendOtpRequest(BaseModel):
+    phone: str = Field(pattern=r"^\+91\d{10}$")
+
+
+class VerifyOtpRequest(BaseModel):
+    phone: str = Field(pattern=r"^\+91\d{10}$")
+    otp: str = Field(pattern=r"^\d{6}$")
+
+
+@api_router.post("/auth/send-otp")
+async def send_otp(input: SendOtpRequest):
+    otp = f"{secrets.randbelow(1000000):06d}"
+    now = datetime.now(timezone.utc)
+    await db.otps.delete_many({"phone": input.phone})
+    await db.otps.insert_one({
+        "phone": input.phone,
+        "otp": otp,
+        "created_at": now.isoformat(),
+        "expires_at": (now + timedelta(minutes=5)).isoformat(),
+    })
+    return {"status": "sent", "demo_otp": otp}
+
+
+@api_router.post("/auth/verify-otp")
+async def verify_otp(input: VerifyOtpRequest):
+    doc = await db.otps.find_one({"phone": input.phone})
+    if not doc or doc["otp"] != input.otp:
+        raise HTTPException(status_code=401, detail="Incorrect code")
+    if datetime.fromisoformat(doc["expires_at"]) < datetime.now(timezone.utc):
+        raise HTTPException(status_code=401, detail="Code expired — request a new one")
+    await db.otps.delete_many({"phone": input.phone})
+    now = datetime.now(timezone.utc).isoformat()
+    await db.users.update_one(
+        {"phone": input.phone},
+        {"$set": {"last_login": now}, "$setOnInsert": {"phone": input.phone, "created_at": now}},
+        upsert=True,
+    )
+    token = jwt.encode(
+        {"sub": input.phone, "exp": datetime.now(timezone.utc) + timedelta(days=30)},
+        os.environ["JWT_SECRET"],
+        algorithm="HS256",
+    )
+    return {"token": token, "phone": input.phone}
+
+
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+
+bearer_scheme = HTTPBearer(auto_error=False)
+
+
+@api_router.get("/auth/me")
+async def auth_me(creds: HTTPAuthorizationCredentials = Depends(bearer_scheme)):
+    if not creds:
+        raise HTTPException(status_code=401, detail="Not logged in")
+    try:
+        payload = jwt.decode(creds.credentials, os.environ["JWT_SECRET"], algorithms=["HS256"])
+    except jwt.PyJWTError:
+        raise HTTPException(status_code=401, detail="Invalid or expired session")
+    return {"phone": payload["sub"]}
 
 
 app.include_router(api_router)
