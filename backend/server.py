@@ -204,6 +204,46 @@ async def auth_me(creds: HTTPAuthorizationCredentials = Depends(bearer_scheme)):
     return {"phone": payload["sub"]}
 
 
+async def require_user(creds: HTTPAuthorizationCredentials = Depends(bearer_scheme)):
+    if not creds:
+        raise HTTPException(status_code=401, detail="Not logged in")
+    try:
+        payload = jwt.decode(creds.credentials, os.environ["JWT_SECRET"], algorithms=["HS256"])
+    except jwt.PyJWTError:
+        raise HTTPException(status_code=401, detail="Invalid or expired session")
+    return payload["sub"]
+
+
+class ProfileUpdate(BaseModel):
+    name: Optional[str] = Field(default=None, max_length=80)
+    make: str = Field(min_length=1, max_length=40)
+    model: str = Field(min_length=1, max_length=60)
+    vehicle_type: str = Field(min_length=1, max_length=20)
+
+
+@api_router.get("/profile")
+async def get_profile(phone: str = Depends(require_user)):
+    user = await db.users.find_one({"phone": phone}, {"_id": 0})
+    if not user:
+        raise HTTPException(status_code=404, detail="Profile not found")
+    return {
+        "phone": phone,
+        "name": user.get("name"),
+        "make": user.get("make"),
+        "model": user.get("model"),
+        "vehicleType": user.get("vehicle_type"),
+    }
+
+
+@api_router.put("/profile")
+async def update_profile(input: ProfileUpdate, phone: str = Depends(require_user)):
+    await db.users.update_one(
+        {"phone": phone},
+        {"$set": {"name": input.name, "make": input.make, "model": input.model, "vehicle_type": input.vehicle_type}},
+    )
+    return {"status": "saved"}
+
+
 app.include_router(api_router)
 
 app.add_middleware(

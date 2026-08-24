@@ -5,6 +5,7 @@ import { waLink } from "../../data/content";
 import { getSession, clearSession } from "../../utils/auth";
 
 const LINKS = [
+  { label: "Home", href: "#top" },
   { label: "Packages", href: "#packages" },
   { label: "Philosophy", href: "#philosophy" },
 ];
@@ -45,10 +46,10 @@ export const Navbar = () => {
         <div className="flex items-center gap-3">
           {session ? (
             <span className="hidden sm:inline-flex items-center gap-2" data-testid="nav-session">
-              <span className="inline-flex items-center gap-1.5 text-xs font-bold text-zinc-700 bg-zinc-100 rounded-full px-3.5 py-2">
+              <a href="/account" data-testid="nav-account-link" className="inline-flex items-center gap-1.5 text-xs font-bold text-zinc-700 bg-zinc-100 hover:bg-[#FFF0E5] rounded-full px-3.5 py-2 transition-colors">
                 <User size={13} className="text-[#FF5A00]" />
                 {session.phone}
-              </span>
+              </a>
               <button
                 onClick={logout}
                 data-testid="nav-logout-button"

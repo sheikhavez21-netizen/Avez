@@ -217,3 +217,14 @@ export const VEHICLES = [
   { brand: "BYD", models: [m("Atto 3", "SUV"), m("Seal", "Sedan"), m("e6", "MUV / MPV"), m("Other", "Other")] },
   { brand: "Other", models: [m("Other", "Other")] },
 ];
+
+export const PRICE_TYPE_MAP = {
+  Hatchback: "Hatchback",
+  Sedan: "Sedan",
+  Coupe: "Sedan",
+  Convertible: "Sedan",
+  SUV: "Compact SUV",
+  "MUV / MPV": "Large SUV",
+  Pickup: "Large SUV",
+  Other: "Compact SUV",
+};

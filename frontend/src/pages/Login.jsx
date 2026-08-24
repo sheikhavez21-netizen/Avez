@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Phone, ShieldCheck, ArrowLeft } from "lucide-react";
-import { setSession } from "../utils/auth";
+import { setSession, setVehicle } from "../utils/auth";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -50,6 +50,13 @@ export default function Login() {
       const data = await r.json();
       if (!r.ok) throw new Error(data.detail || "Verification failed");
       setSession({ token: data.token, phone: data.phone });
+      try {
+        const pr = await fetch(`${API}/profile`, { headers: { Authorization: `Bearer ${data.token}` } });
+        if (pr.ok) {
+          const prof = await pr.json();
+          if (prof.make) setVehicle({ make: prof.make, model: prof.model, vehicleType: prof.vehicleType });
+        }
+      } catch {}
       navigate("/");
     } catch (e) {
       setError(e.message);
