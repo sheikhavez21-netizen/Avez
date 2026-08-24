@@ -52,7 +52,7 @@ export const Hero = () => {
       ref={sectionRef}
       onMouseMove={onMouseMove}
       data-testid="hero-section"
-      className="relative pt-28 pb-16 sm:pt-36 sm:pb-24 overflow-hidden"
+      className="relative pt-24 pb-16 sm:pt-36 sm:pb-24 overflow-hidden"
     >
       <div
         className="absolute inset-0 -z-10"

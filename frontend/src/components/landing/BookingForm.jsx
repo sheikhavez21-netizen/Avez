@@ -295,7 +295,7 @@ export const BookingForm = () => {
                       disabled={blockedSlot}
                       onClick={() => setSlot(s)}
                       data-testid={`booking-slot-${i + 1}`}
-                      className={`rounded-full px-4 py-2.5 text-sm font-bold transition-colors active:scale-95 ${
+                      className={`rounded-full px-5 py-3 text-sm font-bold transition-colors active:scale-95 ${
                         blockedSlot
                           ? "bg-zinc-100 text-zinc-300 line-through cursor-not-allowed"
                           : slot === s
@@ -326,7 +326,7 @@ export const BookingForm = () => {
                     type="button"
                     onClick={() => setUtilities(v)}
                     data-testid={`booking-utilities-${v ? "yes" : "no"}`}
-                    className={`flex-1 rounded-full px-4 py-2.5 text-sm font-bold transition-colors active:scale-95 ${
+                    className={`flex-1 rounded-full px-4 py-3.5 text-base font-bold transition-colors active:scale-95 ${
                       utilities === v
                         ? v
                           ? "bg-emerald-500 text-white"

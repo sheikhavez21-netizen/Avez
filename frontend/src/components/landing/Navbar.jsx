@@ -54,13 +54,13 @@ export const Navbar = () => {
         </div>
       </div>
       {open && (
-        <div data-testid="nav-mobile-menu" className="md:hidden border-t border-zinc-100 bg-white px-5 py-4 flex flex-col gap-4">
+        <div data-testid="nav-mobile-menu" className="md:hidden border-t border-zinc-100 bg-white px-5 py-5 flex flex-col gap-1">
           {LINKS.map((l) => (
             <a
               key={l.href}
               href={resolve(l.href)}
               onClick={() => setOpen(false)}
-              className="text-sm font-semibold text-zinc-700"
+              className="text-base font-bold text-zinc-800 py-3 border-b border-zinc-50 active:text-[#FF5A00]"
             >
               {l.label}
             </a>
@@ -70,7 +70,7 @@ export const Navbar = () => {
             target="_blank"
             rel="noopener noreferrer"
             data-testid="nav-mobile-book-button"
-            className="inline-flex items-center justify-center gap-2 bg-[#FF5A00] text-white text-sm font-bold rounded-full px-5 py-3"
+            className="mt-4 inline-flex items-center justify-center gap-2 bg-[#FF5A00] text-white text-base font-bold rounded-full px-5 py-4 active:scale-95 transition-transform"
           >
             <MessageCircle size={15} />
             Book Now
