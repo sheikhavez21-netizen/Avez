@@ -39,7 +39,9 @@ class StatusCheckCreate(BaseModel):
 class BookingCreate(BaseModel):
     name: Optional[str] = Field(default=None, max_length=80)
     package_name: str = Field(min_length=1, max_length=80)
-    car_type: str = Field(min_length=1, max_length=40)
+    car_type: Optional[str] = Field(default=None, max_length=40)
+    make: Optional[str] = Field(default=None, max_length=40)
+    model: Optional[str] = Field(default=None, max_length=60)
     date: str = Field(pattern=DATE_RE)
     slot: str = Field(min_length=1, max_length=30)
     location: str = Field(min_length=3, max_length=300)

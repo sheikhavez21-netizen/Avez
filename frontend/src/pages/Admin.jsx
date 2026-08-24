@@ -131,7 +131,7 @@ export default function Admin() {
                 {bookings.map((b, i) => (
                   <li key={b.id} data-testid={`booking-row-${i + 1}`} className="border border-zinc-100 rounded-2xl p-4">
                     <div className="flex items-center justify-between gap-3">
-                      <p className="text-sm font-bold text-zinc-900">{b.package_name}{b.car_type ? ` · ${b.car_type}` : ""}</p>
+                      <p className="text-sm font-bold text-zinc-900">{b.package_name}{b.make ? ` · ${b.make} ${b.model || ""}` : b.car_type ? ` · ${b.car_type}` : ""}</p>
                       <span className="text-xs font-bold text-[#FF5A00] bg-[#FFF0E5] rounded-full px-3 py-1">{b.date} · {b.slot}</span>
                     </div>
                     <p className="mt-1.5 text-xs text-zinc-600">{b.location}</p>

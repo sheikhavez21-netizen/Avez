@@ -172,3 +172,29 @@ export const COMING_SOON_AREAS = [
   { name: "Calangute", aliases: ["calangute"] },
   { name: "Candolim", aliases: ["candolim"] },
 ];
+
+export const SERVICES = [
+  { name: "Exterior Wash", desc: "Snow foam quick reset", img: "/assets/cat-sport.jpg", pkg: "Sport Wash" },
+  { name: "Interior + Exterior", desc: "The complete refresh", img: "/assets/cat-gt.jpg", pkg: "GT Wash" },
+  { name: "Signature Detailing", desc: "Deep clean & restore", img: "/assets/cat-rs.jpg", pkg: "RS Signature Wash" },
+  { name: "Ceramic & PPF Care", desc: "Hydrophobic boost", img: "/assets/cat-ceramic.jpg", pkg: "Ceramic Turbo Wash" },
+];
+
+export const CAR_MAKES = {
+  "Maruti Suzuki": ["Swift", "Baleno", "Dzire", "Alto", "Wagon R", "Fronx", "Brezza", "Ertiga", "Ciaz", "Jimny", "Grand Vitara", "Other"],
+  Hyundai: ["i10", "i20", "Aura", "Verna", "Venue", "Creta", "Alcazar", "Tucson", "Exter", "Other"],
+  Tata: ["Tiago", "Tigor", "Punch", "Altroz", "Nexon", "Harrier", "Safari", "Curvv", "Other"],
+  Honda: ["Amaze", "City", "Elevate", "Other"],
+  Toyota: ["Glanza", "Taisor", "Innova Crysta", "Innova Hycross", "Fortuner", "Camry", "Other"],
+  Mahindra: ["Bolero", "Scorpio-N", "Scorpio Classic", "XUV 3XO", "XUV700", "Thar", "XUV400", "Other"],
+  Kia: ["Sonet", "Seltos", "Carens", "Seltos EV", "Other"],
+  MG: ["Comet", "Astor", "Hector", "ZS EV", "Gloster", "Other"],
+  Skoda: ["Slavia", "Kushaq", "Kodiaq", "Kylaq", "Other"],
+  Volkswagen: ["Polo", "Virtus", "Taigun", "Tiguan", "Other"],
+  Renault: ["Kwid", "Triber", "Kiger", "Other"],
+  Nissan: ["Magnite", "Other"],
+  BMW: ["3 Series", "5 Series", "X1", "X3", "X5", "X7", "Other"],
+  "Mercedes-Benz": ["A-Class", "C-Class", "E-Class", "GLA", "GLC", "GLE", "Other"],
+  Audi: ["A4", "A6", "Q3", "Q5", "Q7", "Other"],
+  Other: ["Other"],
+};

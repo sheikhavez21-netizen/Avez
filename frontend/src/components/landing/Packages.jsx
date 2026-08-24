@@ -1,6 +1,6 @@
 import { Clock, Check, ChevronDown } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
-import { PACKAGES } from "../../data/content";
+import { PACKAGES, waLink } from "../../data/content";
 
 export const Packages = () => (
   <section id="packages" data-testid="packages-section" className="py-24 sm:py-32">
@@ -66,8 +66,9 @@ export const Packages = () => (
               </AccordionItem>
             </Accordion>
             <a
-              href="#book-slot"
-              onClick={() => window.dispatchEvent(new CustomEvent("relay:select-package", { detail: p.name }))}
+              href={waLink(`Hi Relay! I want to book ${p.name}`)}
+              target="_blank"
+              rel="noopener noreferrer"
               data-testid={`package-book-${p.code.toLowerCase()}`}
               className={`mt-auto pt-5 inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-bold transition-colors active:scale-95 ${
                 p.popular

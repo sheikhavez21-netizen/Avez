@@ -5,12 +5,10 @@ import Lenis from "lenis";
 import { useReveal } from "@/hooks/useReveal";
 import { Navbar } from "@/components/landing/Navbar";
 import { Hero } from "@/components/landing/Hero";
-import { Marquee } from "@/components/landing/Marquee";
+import { QuickActions } from "@/components/landing/QuickActions";
 import { Philosophy } from "@/components/landing/Philosophy";
+import { ServicesGrid } from "@/components/landing/ServicesGrid";
 import { Packages } from "@/components/landing/Packages";
-import { BookingForm } from "@/components/landing/BookingForm";
-import { AreaChecker } from "@/components/landing/AreaChecker";
-import { FAQ } from "@/components/landing/FAQ";
 import { BookingCTA } from "@/components/landing/BookingCTA";
 import { Footer } from "@/components/landing/Footer";
 import { MobileCTA } from "@/components/landing/MobileCTA";
@@ -56,12 +54,10 @@ const Home = () => {
       <Navbar />
       <Hero />
       <div className="flag-strip" />
+      <QuickActions />
       <Philosophy />
-      <Marquee />
+      <ServicesGrid />
       <Packages />
-      <BookingForm />
-      <AreaChecker />
-      <FAQ />
       <BookingCTA />
       <div className="flag-strip" />
       <Footer />
